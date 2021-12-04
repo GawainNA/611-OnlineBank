@@ -1,0 +1,109 @@
+package view;
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class TransferInside extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField_amount;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					TransferInside frame = new TransferInside();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public TransferInside() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblHeadline = new JLabel("Transfer");
+		lblHeadline.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		lblHeadline.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHeadline.setBounds(93, 10, 238, 24);
+		contentPane.add(lblHeadline);
+		
+		JLabel lblsubtitle = new JLabel("Can only transfer to your other accounts");
+		lblsubtitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblsubtitle.setBounds(82, 44, 267, 15);
+		contentPane.add(lblsubtitle);
+		
+		JLabel lblAmount = new JLabel("Amount");
+		lblAmount.setBounds(62, 91, 54, 15);
+		contentPane.add(lblAmount);
+		
+		textField_amount = new JTextField();
+		textField_amount.setBounds(111, 88, 66, 21);
+		contentPane.add(textField_amount);
+		textField_amount.setColumns(10);
+		
+		JLabel lblCurrency = new JLabel("Currency");
+		lblCurrency.setBounds(197, 91, 54, 15);
+		contentPane.add(lblCurrency);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"USD", "JPY", "EUR", "RMB", "GBP"}));
+		comboBox.setBounds(261, 87, 54, 23);
+		contentPane.add(comboBox);
+		
+		JLabel lblNewLabel = new JLabel("Transfer To");
+		lblNewLabel.setBounds(62, 145, 73, 15);
+		contentPane.add(lblNewLabel);
+		
+		JRadioButton rdbtnChecking = new JRadioButton("Checking");
+		buttonGroup.add(rdbtnChecking);
+		rdbtnChecking.setBounds(141, 141, 86, 23);
+		contentPane.add(rdbtnChecking);
+		
+		JRadioButton rdbtnSavings = new JRadioButton("Savings");
+		buttonGroup.add(rdbtnSavings);
+		rdbtnSavings.setBounds(229, 141, 79, 23);
+		contentPane.add(rdbtnSavings);
+		
+		JButton btnConfirm = new JButton("Confirm");
+		btnConfirm.setBounds(99, 187, 93, 23);
+		contentPane.add(btnConfirm);
+		
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnCancel.setBounds(238, 187, 93, 23);
+		contentPane.add(btnCancel);
+	}
+}
