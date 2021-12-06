@@ -41,7 +41,7 @@ public class ManageLoan extends JFrame {
 	 */
 	public ManageLoan() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 404);
+		setBounds(100, 100, 450, 514);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -57,25 +57,14 @@ public class ManageLoan extends JFrame {
 		lblNewLabel_1.setBounds(10, 48, 89, 15);
 		contentPane.add(lblNewLabel_1);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setEditable(false);
-		textArea.setBounds(114, 104, 299, 79);
-		contentPane.add(textArea);
-		
-		JScrollPane scrollPane = new JScrollPane(textArea);
-		scrollPane.setBounds(10, 73, 414, 184);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 73, 414, 96);
 		contentPane.add(scrollPane);
 		
-		JButton btnMRquest = new JButton("Manage Request");
-		btnMRquest.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ManageRequest tmp = new ManageRequest();
-				tmp.setVisible(true);
-				dispose();
-			}
-		});
-		btnMRquest.setBounds(46, 299, 130, 33);
-		contentPane.add(btnMRquest);
+		JButton btnAccept = new JButton("Accept");
+		
+		btnAccept.setBounds(44, 411, 130, 33);
+		contentPane.add(btnAccept);
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
@@ -83,8 +72,16 @@ public class ManageLoan extends JFrame {
 				dispose();
 			}
 		});
-		btnBack.setBounds(270, 299, 130, 33);
+		btnBack.setBounds(270, 411, 130, 33);
 		contentPane.add(btnBack);
+		
+		JLabel lblNewLabel = new JLabel("Requested Loan");
+		lblNewLabel.setBounds(10, 252, 89, 15);
+		contentPane.add(lblNewLabel);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(10, 277, 414, 96);
+		contentPane.add(scrollPane_1);
 		
 		
 	}

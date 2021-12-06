@@ -5,14 +5,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 public class Savings {
 
 	private JFrame frame;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -50,14 +53,14 @@ public class Savings {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 406);
+		frame.setBounds(100, 100, 491, 517);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblHeadline = new JLabel("Savings Account");
-		lblHeadline.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		lblHeadline.setBounds(151, 10, 134, 21);
-		frame.getContentPane().add(lblHeadline);
+		JLabel lblNewLabel = new JLabel("Savings Account");
+		lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 18));
+		lblNewLabel.setBounds(167, 10, 151, 21);
+		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblBalance = new JLabel("Balance");
 		lblBalance.setFont(new Font("Times New Roman", Font.PLAIN, 15));
@@ -66,7 +69,7 @@ public class Savings {
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setEditable(false);
-		textArea.setBounds(26, 112, 162, 233);
+		textArea.setBounds(26, 112, 230, 222);
 		frame.getContentPane().add(textArea);
 		
 		JLabel lblID = new JLabel("ID: ");
@@ -74,7 +77,7 @@ public class Savings {
 		lblID.setBounds(151, 41, 35, 15);
 		frame.getContentPane().add(lblID);
 		
-		JLabel lblid_Display = new JLabel("817237332");
+		JLabel lblid_Display = new JLabel("817237331");
 		lblid_Display.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		lblid_Display.setHorizontalAlignment(SwingConstants.CENTER);
 		lblid_Display.setBounds(177, 41, 115, 15);
@@ -87,22 +90,16 @@ public class Savings {
 				n.showFrame();
 			}
 		});
-		btnTransfer.setBounds(290, 113, 134, 30);
+		btnTransfer.setBounds(317, 109, 134, 30);
 		frame.getContentPane().add(btnTransfer);
 		
 		JButton btnCloseAccount = new JButton("Close Account");
-		btnCloseAccount.setBounds(290, 275, 134, 30);
+		btnCloseAccount.setBounds(317, 165, 134, 30);
 		frame.getContentPane().add(btnCloseAccount);
 		
-		JButton btnWithDraw = new JButton("WitDraw");
-		btnWithDraw.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Withdraw W = new Withdraw();
-				W.setVisible(true);
-			}
-		});
-		btnWithDraw.setBounds(290, 207, 134, 30);
-		frame.getContentPane().add(btnWithDraw);
+		JButton btnDeposit = new JButton("Deposit");
+		btnDeposit.setBounds(26, 414, 105, 30);
+		frame.getContentPane().add(btnDeposit);
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
@@ -110,26 +107,35 @@ public class Savings {
 				frame.dispose();
 			}
 		});
-		btnBack.setBounds(290, 315, 134, 30);
+		btnBack.setBounds(365, 414, 86, 30);
 		frame.getContentPane().add(btnBack);
 		
-		JLabel lblInterests = new JLabel("Current Interests: ");
-		lblInterests.setBounds(192, 80, 115, 19);
-		frame.getContentPane().add(lblInterests);
+		JButton btnWithdraw = new JButton("WithDraw");
+		btnWithdraw.setBounds(151, 414, 105, 30);
+		frame.getContentPane().add(btnWithdraw);
 		
-		JLabel lblInterests_Display = new JLabel("0.2%");
-		lblInterests_Display.setBounds(317, 80, 54, 19);
-		frame.getContentPane().add(lblInterests_Display);
+		JLabel lblNewLabel_1 = new JLabel("Amount");
+		lblNewLabel_1.setBounds(26, 374, 48, 15);
+		frame.getContentPane().add(lblNewLabel_1);
 		
-		JButton btnDeposit = new JButton("Deposit");
-		btnDeposit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Deposit D = new Deposit();
-				D.setVisible(true);
-			}
-		});
-		btnDeposit.setBounds(290, 159, 134, 30);
-		frame.getContentPane().add(btnDeposit);
+	
+		
+		JLabel lblNewLabel_2 = new JLabel("Currency");
+		lblNewLabel_2.setBounds(141, 374, 54, 15);
+		frame.getContentPane().add(lblNewLabel_2);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(205, 370, 51, 23);
+		frame.getContentPane().add(comboBox);
+		
+		textField = new JTextField();
+		textField.setBounds(65, 371, 66, 21);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblNewLabel_3 = new JLabel("Interests : ");
+		lblNewLabel_3.setBounds(227, 84, 91, 15);
+		frame.getContentPane().add(lblNewLabel_3);
 	}
 
 }
