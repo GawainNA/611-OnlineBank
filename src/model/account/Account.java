@@ -21,4 +21,29 @@ public abstract class Account {
         isClosed = false;
     }
 
+    /**
+     * 
+     * @param destId: destinate account id.
+     * @param amount: amount of money to transfer.
+     * @param currencyType: currency type
+     * @return if destId doesn't exist, or do not have enough money to transfer, return false. else return true.
+     */
+    public boolean transfer(int destId, double amount, CurrencyType currencyType) {
+        // TODO:
+        
+        return true;
+    }
+
+    /**
+     * 
+     * @param destId: destinate account id
+     * @param currency: currency to transfer
+     * @return if destId doesn't exist, or do not have enough money to transfer, return false. else return true.
+     */
+    public boolean transfer(int destId, Currency currency) {
+        // TODO:
+
+        return true;
+    }
+
 }

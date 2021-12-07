@@ -13,6 +13,7 @@ public class CustomerFactory {
 
     public Customer createCustomer(String username, 
         UserGender gender, 
+        String email,
         String passwd, 
         String address, 
         String phoneNum) {
