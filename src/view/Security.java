@@ -54,7 +54,7 @@ public class Security {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblHeadline = new JLabel("Checking Account");
+		JLabel lblHeadline = new JLabel("Security Account");
 		lblHeadline.setFont(new Font("Times New Roman", Font.PLAIN, 18));
 		lblHeadline.setBounds(141, 10, 151, 21);
 		frame.getContentPane().add(lblHeadline);
@@ -102,6 +102,15 @@ public class Security {
 		});
 		btnBack.setBounds(290, 315, 134, 30);
 		frame.getContentPane().add(btnBack);
+		
+		JButton btnStock = new JButton("Stock");
+		btnStock.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Stock tmp = new Stock();
+				tmp.setVisible(true);
+			}
+		});
+		btnStock.setBounds(290, 169, 134, 30);
+		frame.getContentPane().add(btnStock);
 	}
-
 }

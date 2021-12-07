@@ -77,18 +77,8 @@ public class CustomerMain {
 				tmp.setVisible(true);
 			}
 		});
-		btnLoan.setBounds(289, 187, 145, 33);
+		btnLoan.setBounds(289, 206, 145, 33);
 		frame.getContentPane().add(btnLoan);
-		
-		JButton btnStock = new JButton("Stock");
-		btnStock.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Stock tmp = new Stock();
-				tmp.setVisible(true);
-			}
-		});
-		btnStock.setBounds(289, 242, 145, 33);
-		frame.getContentPane().add(btnStock);
 		
 		JButton btnSavings = new JButton("Savings Account");
 		btnSavings.addActionListener(new ActionListener() {
@@ -142,11 +132,11 @@ public class CustomerMain {
 		frame.getContentPane().add(btnPInfo);
 		
 		JButton btnOpenAccount = new JButton("Open Account");
-		btnOpenAccount.setBounds(289, 295, 145, 33);
+		btnOpenAccount.setBounds(289, 263, 145, 33);
 		frame.getContentPane().add(btnOpenAccount);
 		
 		JButton btnTranscationLog = new JButton("Transcation Log");
-		btnTranscationLog.setBounds(289, 348, 145, 33);
+		btnTranscationLog.setBounds(289, 321, 145, 33);
 		frame.getContentPane().add(btnTranscationLog);
 	}
 }

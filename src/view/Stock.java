@@ -41,7 +41,7 @@ public class Stock extends JFrame {
 	 */
 	public Stock() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 469);
+		setBounds(100, 100, 450, 524);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -90,11 +90,11 @@ public class Stock extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		JButton btnBuy = new JButton("Buy");
-		btnBuy.setBounds(31, 372, 93, 23);
+		btnBuy.setBounds(168, 376, 93, 23);
 		contentPane.add(btnBuy);
 		
 		JButton btnSell = new JButton("Sell");
-		btnSell.setBounds(172, 372, 93, 23);
+		btnSell.setBounds(168, 193, 93, 23);
 		contentPane.add(btnSell);
 		
 		JButton btnNewBack = new JButton("Back");
@@ -103,7 +103,7 @@ public class Stock extends JFrame {
 				dispose();
 			}
 		});
-		btnNewBack.setBounds(309, 372, 93, 23);
+		btnNewBack.setBounds(309, 443, 93, 23);
 		contentPane.add(btnNewBack);
 		
 		JTextArea txtrAvailiableStocks = new JTextArea();
