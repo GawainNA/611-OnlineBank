@@ -13,6 +13,26 @@ public class Collateral {
         this.name = name;
         this.price = price;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Currency getPrice() {
+        return price;
+    }
+
+    public void setPrice(Currency price) {
+        this.price = price;
+    }
     
     
 }

@@ -3,6 +3,7 @@ package model.account;
 import java.util.HashMap;
 import java.util.Map;
 
+import model.ErrCode;
 import model.currency.Currency;
 import model.currency.CurrencyType;
 import util.IdCreator;
@@ -28,10 +29,10 @@ public abstract class Account {
      * @param currencyType: currency type
      * @return if destId doesn't exist, or do not have enough money to transfer, return false. else return true.
      */
-    public boolean transfer(int destId, double amount, CurrencyType currencyType) {
+    public ErrCode transfer(int destId, double amount, CurrencyType currencyType) {
         // TODO:
         
-        return true;
+        return null;
     }
 
     /**
@@ -40,10 +41,10 @@ public abstract class Account {
      * @param currency: currency to transfer
      * @return if destId doesn't exist, or do not have enough money to transfer, return false. else return true.
      */
-    public boolean transfer(int destId, Currency currency) {
+    public ErrCode transfer(int destId, Currency currency) {
         // TODO:
 
-        return true;
+        return null;
     }
 
 }
