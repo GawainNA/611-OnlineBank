@@ -4,6 +4,7 @@ import java.util.Currency;
 import java.util.List;
 
 import model.Collateral;
+import model.ErrCode;
 import model.Loan;
 import model.account.CheckingAccount;
 import model.account.SavingAccount;
@@ -29,20 +30,20 @@ public class Customer extends User{
      * 
      * @return if already have checking account, return false. else return true.
      */
-    public boolean openCheckingAccount() {
+    public ErrCode openCheckingAccount() {
         // TODO:
 
-        return true;
+        return null;
     }
 
     /**
      * 
      * @return if already have saving account, return false. else return true.
      */
-    public boolean openSavingAccount() {
+    public ErrCode openSavingAccount() {
         // TODO:
 
-        return true;
+        return null;
     }
 
     /**
@@ -50,30 +51,30 @@ public class Customer extends User{
      * @return if already have security account 
      *          or do not have enough money in saving account, return false. else return true.
      */
-    public boolean openSecurityAccount() {
+    public ErrCode openSecurityAccount() {
         // TODO:
 
-        return true;
+        return null;
     }
 
     /**
      * 
      * @return account can be closed only if the deposit of account is 0.
      */
-    public boolean closeCheckingAccount() {
+    public ErrCode closeCheckingAccount() {
         // TODO:
 
-        return true;
+        return null;
     }
 
     /**
      * 
      * @return account can be closed only if the deposit of account is 0.
      */
-    public boolean closeSavingAccount() {
+    public ErrCode closeSavingAccount() {
         // TODO:
-
-        return true;
+        
+        return null;
     }
 
     /**
@@ -82,10 +83,10 @@ public class Customer extends User{
      *  1. the deposit of account is 0;
      *  2. no more stock.
      */
-    public boolean closeSecurityAccount() {
+    public ErrCode closeSecurityAccount() {
         // TODO:
 
-        return true;
+        return null;
     }
 
     /**
@@ -114,10 +115,10 @@ public class Customer extends User{
      * @param loan: the loan to be reedemd
      * @return if there are enough money in checking account, return true. else return false.
      */
-    public boolean redeemLoan(Loan loan) {
+    public ErrCode redeemLoan(Loan loan, double amount) {
         // TODO:
 
-        return true;
+        return null;
     }
 
     /***************** getter *********************/
