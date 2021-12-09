@@ -3,15 +3,11 @@ package model;
 import java.util.List;
 import java.util.Map;
 
-import controller.SampleController;
 import model.user.Customer;
+import model.user.CustomerFactory;
 import model.user.Manager;
 import model.user.User;
 import model.user.UserGender;
-import view.CustomerMain;
-import view.ManagerMain;
-
-import javax.swing.*;
 
 /**
  * Singleton
@@ -21,12 +17,11 @@ public class Bank {
     
     // private Map<Integer, Customer> id2CustomerMap;
     // private Map<Integer, Manager> id2ManagerMap;
-    private List<Customer> customerList;
     private Manager manager;
     private transient Map<String, Customer> username2CustomerMap;
-    private transient Map<String, Manager> username2ManagerMap;
 
-    private Bank(){
+    private Bank() {
+        manager = Manager.getInstance();
     }
 
     public static Bank getInstance() {
@@ -66,16 +61,23 @@ public class Bank {
      * @param openSaving
      * @return successful or not
      */
-    public boolean addCustomer(String userName, 
+    public boolean addCustomer(String username, 
                                 UserGender gender, 
                                 String address, 
                                 String email,
                                 String passwd,
-                                String phone,
-                                boolean openChecking,
-                                boolean openSaving) {
-        // TODO:
-
+                                String phoneNum,
+                                boolean openCheckingAccount,
+                                boolean openSavingAccount) {
+        // TODO: first to see whether already have customer with same username
+        Customer newCustomer = CustomerFactory.getInstance().createCustomer(username, gender, email, passwd, address, phoneNum);
+        if(openCheckingAccount) { 
+            newCustomer.openCheckingAccount();
+        }
+        if(openSavingAccount) {
+            newCustomer.openSavingAccount();
+        }
+        username2CustomerMap.put(username, newCustomer);
         return true;
     }
 }

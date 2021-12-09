@@ -1,7 +1,9 @@
 package model.user;
 
 import java.io.Serializable;
+import java.util.List;
 
+import model.Transaction;
 import util.IdCreator;
 
 /**
@@ -16,6 +18,8 @@ public abstract class User implements Serializable{
     private String passwd;
     private String address;
     private String phoneNum;
+
+    private List<Transaction> transactionList;
 
     public User(String username, UserGender gender, String passwd, String address, String phoneNum) {
         this.uid = IdCreator.createRandomInt();

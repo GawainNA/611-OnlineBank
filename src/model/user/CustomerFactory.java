@@ -4,11 +4,17 @@ package model.user;
  * Factory to create customer. CustomerFactory is a singleton
  */
 public class CustomerFactory {
-    
-    public CustomerFactory getInstance() {
-        // TODO:
+    private static CustomerFactory customerFactory;
 
-        return null;
+    private CustomerFactory() {
+
+    }
+    
+    public static CustomerFactory getInstance() {
+        if(customerFactory == null) {
+            customerFactory = new CustomerFactory();
+        }
+        return customerFactory;
     }
 
     public Customer createCustomer(String username, 
@@ -18,7 +24,9 @@ public class CustomerFactory {
         String address, 
         String phoneNum) {
         // TODO: create a new customer, also need to persistence in file
+        Customer newCustomer = new Customer(username, gender, passwd, address, phoneNum);
+        // TODO: add to warehouse
 
-        return null;
+        return newCustomer;
     }
 }
