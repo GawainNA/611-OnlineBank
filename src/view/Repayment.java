@@ -61,31 +61,9 @@ public class Repayment extends JFrame {
 		contentPane.add(lblAmount);
 		
 		textField_Amount = new JTextField();
-		textField_Amount.setBounds(110, 122, 66, 21);
+		textField_Amount.setBounds(110, 122, 205, 21);
 		contentPane.add(textField_Amount);
 		textField_Amount.setColumns(10);
-		
-		JLabel lblCurrency = new JLabel("Currency");
-		lblCurrency.setBounds(186, 125, 54, 15);
-		contentPane.add(lblCurrency);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(242, 121, 54, 23);
-		contentPane.add(comboBox);
-		
-		JLabel lblAccount = new JLabel("Payment Account: ");
-		lblAccount.setBounds(46, 150, 107, 15);
-		contentPane.add(lblAccount);
-		
-		JRadioButton rdbtnChecking = new JRadioButton("Checking");
-		buttonGroup.add(rdbtnChecking);
-		rdbtnChecking.setBounds(155, 146, 85, 23);
-		contentPane.add(rdbtnChecking);
-		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Savings");
-		buttonGroup.add(rdbtnNewRadioButton);
-		rdbtnNewRadioButton.setBounds(242, 146, 74, 23);
-		contentPane.add(rdbtnNewRadioButton);
 		
 		JButton btnConfirm = new JButton("Confirm");
 		btnConfirm.setBounds(110, 190, 93, 23);
