@@ -15,7 +15,7 @@ public enum UserGender {
         return this.gender;
     }
 
-    public UserGender Str2UserGender(String gender) {
+    public static UserGender Str2UserGender(String gender) {
         if("male".equalsIgnoreCase(gender)) {
             return MALE;
         } else if("female".equalsIgnoreCase(gender)) {
