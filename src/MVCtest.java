@@ -1,4 +1,4 @@
-import controller.SampleController;
+import controller.SignInController;
 import model.*;
 import view.Sign;
 
@@ -8,7 +8,7 @@ public class MVCtest {
         Sign sign = new Sign();
         Bank bank = Bank.getInstance();
 
-        SampleController sample = new SampleController(bank,sign);
+        SignInController sample = new SignInController(bank,sign);
 
         sign.showFrame();
     }
