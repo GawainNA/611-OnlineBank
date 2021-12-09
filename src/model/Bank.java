@@ -20,10 +20,20 @@ public class Bank {
     // private Map<Integer, Manager> id2ManagerMap;
     private Manager manager;
     private transient Map<String, Customer> username2CustomerMap;
+    private BankDatabase bankDatabase;
 
     private Bank() {
         manager = Manager.getInstance();
         username2CustomerMap = new HashMap<>();
+        setBankDatabase(BankDatabaseByDisk.getInstance());
+    }
+
+    public BankDatabase getBankDatabase() {
+        return bankDatabase;
+    }
+
+    public void setBankDatabase(BankDatabase bankDatabase) {
+        this.bankDatabase = bankDatabase;
     }
 
     public static Bank getInstance() {
