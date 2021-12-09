@@ -3,10 +3,15 @@ package model;
 import java.util.List;
 import java.util.Map;
 
+import controller.SampleController;
 import model.user.Customer;
 import model.user.Manager;
 import model.user.User;
 import model.user.UserGender;
+import view.CustomerMain;
+import view.ManagerMain;
+
+import javax.swing.*;
 
 /**
  * Singleton
@@ -21,7 +26,7 @@ public class Bank {
     private transient Map<String, Customer> username2CustomerMap;
     private transient Map<String, Manager> username2ManagerMap;
 
-    private Bank() {
+    private Bank(){
     }
 
     public static Bank getInstance() {

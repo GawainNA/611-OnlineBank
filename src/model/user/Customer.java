@@ -16,7 +16,8 @@ public class Customer extends User{
     private SecurityAccount securityAccount;
     private List<Loan> loanList;
 
-    public Customer(String username, UserGender gender, String passwd, String address, String phoneNum) {
+    
+    Customer(String username, UserGender gender, String passwd, String address, String phoneNum) {
         super(username, gender, passwd, address, phoneNum);
         //TODO Auto-generated constructor stub
     }
