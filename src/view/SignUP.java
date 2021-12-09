@@ -3,19 +3,9 @@ import model.user.UserGender;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
 import java.awt.BorderLayout;
-import javax.swing.SwingConstants;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
-import javax.swing.JCheckBox;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -202,5 +192,9 @@ public class SignUP {
 
 	public boolean isOpenSavings(){
 		return chckbx_Savings.isSelected();
+	}
+
+	public void showMessage(String message){
+		JOptionPane.showMessageDialog(frame, message);
 	}
 }

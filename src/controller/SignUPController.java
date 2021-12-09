@@ -15,15 +15,28 @@ public class SignUPController {
         this.bank = bank;
         this.signUP = signUP;
 
-
+        signUP.addConfirmListener(new SignUPActionListener());
     }
 
     class SignUPActionListener implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            UserGender()
-            bank.addCustomer(signUP.getName(), UserGender.signUP.getGender(),signUP.getAddress(), signUP.getEmail(), signUP.getPassword(), signUP.isOpenChecking(), signUP.isOpenSavings();
+            boolean isSuccess = bank.addCustomer(signUP.getName(),
+                    UserGender.Str2UserGender(signUP.getGender()),
+                    signUP.getAddress(),
+                    signUP.getEmail(),
+                    signUP.getPassword(),
+                    signUP.getPhoneNum(),
+                    signUP.isOpenChecking(),
+                    signUP.isOpenSavings());
+
+            if (isSuccess){
+                signUP.showMessage("Sign UP Successfully");
+                signUP.close();
+            }else {
+                signUP.showMessage("Unsuccessful! Please check every input info.");
+            }
         }
     }
 

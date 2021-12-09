@@ -94,12 +94,6 @@ public class Sign {
 		frame.getContentPane().add(button_sign_in);
 		
 		button_sign_up = new JButton("Sign up");
-		button_sign_up.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				SignUP n = new SignUP();
-				n.showFrame();
-			}
-		});
 		button_sign_up.setBounds(235, 195, 93, 23);
 		frame.getContentPane().add(button_sign_up);
 	}

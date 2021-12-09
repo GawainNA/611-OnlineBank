@@ -16,6 +16,7 @@ public class SampleController {
         this.sign=sign;
 
         sign.addSignListener(new SignListener());
+        sign.addSignUpListener(new SignUPListener());
     }
 
     class SignListener implements ActionListener{
@@ -38,6 +39,7 @@ public class SampleController {
         @Override
         public void actionPerformed(ActionEvent e) {
             SignUP signUP = new SignUP();
+            SignUPController suController = new SignUPController(bank,signUP);
             signUP.showFrame();
         }
     }
