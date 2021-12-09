@@ -1,5 +1,6 @@
 package model;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ public class Bank {
 
     private Bank() {
         manager = Manager.getInstance();
+        username2CustomerMap = new HashMap<>();
     }
 
     public static Bank getInstance() {
