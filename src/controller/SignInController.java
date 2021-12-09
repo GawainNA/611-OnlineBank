@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 public class SignInController {
     Bank bank;
     Sign sign;
-
+    //test
     public SignInController(Bank bank, Sign sign){
         this.bank=bank;
         this.sign=sign;
