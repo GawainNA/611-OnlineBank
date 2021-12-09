@@ -2,6 +2,7 @@ package model.account;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import model.ErrCode;
 import model.currency.Currency;
@@ -45,6 +46,25 @@ public abstract class Account {
         // TODO:
 
         return null;
+    }
+
+
+    /**
+     * 
+     * @return all currencyType that in user account
+     */
+    public Set<CurrencyType> getAllCurrencyType() {
+        return currencyMap.keySet();
+    }
+
+
+    /**
+     * 
+     * @param currencyType: type of currency to get
+     * @return: currency of specific currency type. if currency type does not exist, return null
+     */
+    public Currency getCurrencyByType(CurrencyType currencyType) {
+        return currencyMap.get(currencyType);
     }
 
 }
