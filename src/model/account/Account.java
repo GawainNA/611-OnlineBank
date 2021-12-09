@@ -44,7 +44,7 @@ public abstract class Account {
      */
     public ErrCode transfer(int destId, Currency currency) {
         // TODO:
-
+        
         return null;
     }
 
