@@ -1,6 +1,15 @@
 package model;
 
 public class ErrCode {
-    boolean isSuccess;
-    String errMsg;
+    public boolean isSuccess;
+    public String errMsg;
+
+    public ErrCode() {
+
+    }
+
+    public ErrCode(boolean isSuccess, String errMsg) {
+        this.isSuccess = isSuccess;
+        this.errMsg = errMsg;
+    }
 }
