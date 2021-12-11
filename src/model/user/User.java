@@ -1,8 +1,8 @@
 package model.user;
 
-import java.io.Serializable;
 import java.util.List;
 
+import model.Persistable;
 import model.Transaction;
 import util.IdCreator;
 
@@ -11,7 +11,7 @@ import util.IdCreator;
  */
 
 // TODO: all set() should update to file
-public abstract class User implements Serializable{
+public abstract class User implements Persistable{
     private int uid;
     private String username;
     private UserGender gender;

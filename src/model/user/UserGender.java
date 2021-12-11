@@ -1,6 +1,8 @@
 package model.user;
 
-public enum UserGender {
+import model.Persistable;
+
+public enum UserGender implements Persistable {
     MALE("male"),
     FEMALE("female"),
     UNDEFINE("");

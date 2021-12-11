@@ -3,7 +3,7 @@ package model;
 import model.currency.Currency;
 import util.IdCreator;
 
-public class Collateral {
+public class Collateral implements Persistable{
     private int id;
     private String name;
     private Currency price;

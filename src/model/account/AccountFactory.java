@@ -1,9 +1,10 @@
 package model.account;
 
+
 /**
  * use factory pattern to create account. AccountFactory is a singleton
  */
-public class AccountFactory {
+public class AccountFactory{
     private static AccountFactory accountFactory;
 
     private AccountFactory() {

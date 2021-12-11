@@ -4,7 +4,7 @@ import java.util.Currency;
 
 import util.IdCreator;
 
-public class Loan {
+public class Loan implements Persistable{
     private int id;
     private Currency loanPrice;
     private Collateral collateral;

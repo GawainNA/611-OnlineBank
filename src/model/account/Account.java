@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import model.ErrCode;
+import model.Persistable;
 import model.currency.Currency;
 import model.currency.CurrencyType;
 import util.IdCreator;
@@ -12,7 +13,7 @@ import util.IdCreator;
 /**
  * abstract class of account
  */
-public abstract class Account {
+public abstract class Account{
     private int id;
     private Map<CurrencyType, Currency> currencyMap;
     private boolean isClosed;

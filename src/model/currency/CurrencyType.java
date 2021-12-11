@@ -1,6 +1,8 @@
 package model.currency;
 
-public enum CurrencyType {
+import model.Persistable;
+
+public enum CurrencyType implements Persistable{
     DOLLAR("dollar", 1),
     CNY("cny", 6.5),
     POUND("pound", 0.75);

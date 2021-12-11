@@ -1,10 +1,13 @@
-package model;
+package model.account.database;
 
 import java.util.List;
 import java.util.Map;
 
+import model.Loan;
+import model.Persistable;
 import model.account.Account;
 import model.user.Customer;
+import model.user.Manager;
 
 /**
  * This class stores all objects that needed to be persisted. 
@@ -15,9 +18,8 @@ import model.user.Customer;
 public class BankDatabaseByDisk implements BankDatabase{
     // TODO:
     // list of objects, use to persistence
-    private List<Account> accountList;
     private List<Customer> customerList;
-    private List<Loan> loanList;
+    private Manager manager;
 
     // map of objects, use to accelerate search speed
     // key: object id; value: object

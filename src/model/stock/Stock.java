@@ -2,7 +2,9 @@ package model.stock;
 
 import java.util.Currency;
 
-public class Stock {
+import model.Persistable;
+
+public class Stock implements Persistable{
     private String name;
     private Currency price;
     private int amount; // amount of stocks

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import model.account.database.BankDatabase;
+import model.account.database.BankDatabaseByDisk;
 import model.user.Customer;
 import model.user.CustomerFactory;
 import model.user.Manager;
@@ -16,8 +18,6 @@ import model.user.UserGender;
 public class Bank {
     private static Bank bank;
     
-    // private Map<Integer, Customer> id2CustomerMap;
-    // private Map<Integer, Manager> id2ManagerMap;
     private Manager manager;
     private transient Map<String, Customer> username2CustomerMap;
     private BankDatabase bankDatabase;

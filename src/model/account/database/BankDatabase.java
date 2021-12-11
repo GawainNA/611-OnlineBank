@@ -1,5 +1,6 @@
-package model;
+package model.account.database;
 
+import model.Loan;
 import model.account.Account;
 import model.user.Customer;
 

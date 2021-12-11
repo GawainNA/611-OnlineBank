@@ -1,6 +1,8 @@
 package model.currency;
 
-public class Currency {
+import model.Persistable;
+
+public class Currency implements Persistable{
     private CurrencyType currencyType;
     private double amount;
 
