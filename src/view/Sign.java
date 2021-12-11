@@ -13,12 +13,15 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.Arrays;
 
 public class Sign {
 
 	private JFrame frame;
 	private JPasswordField passwordField;
 	private JTextField textfield_username;
+	private JButton button_sign_in;
+	private JButton button_sign_up;
 
 	/**
 	 * Launch the application.
@@ -86,34 +89,44 @@ public class Sign {
 		frame.getContentPane().add(textfield_username);
 		textfield_username.setColumns(10);
 		
-		JButton button_sign_in = new JButton("Sign in");
-		button_sign_in.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(textfield_username.getText().equals("Gawain")&&passwordField.getText().equals("test")) {
-					CustomerMain M = new CustomerMain();
-					M.showFrame();
-					frame.dispose();
-				}else if(textfield_username.getText().equals("admin")&&passwordField.getText().equals("admin")){
-					ManagerMain tmp = new ManagerMain();
-					tmp.setVisible(true);
-					frame.dispose();
-				}
-				else {
-					JOptionPane.showMessageDialog(frame, "Unmatched!");
-				}
-			}
-		});
+		button_sign_in = new JButton("Sign in");
 		button_sign_in.setBounds(115, 195, 93, 23);
 		frame.getContentPane().add(button_sign_in);
 		
-		JButton button_sign_up = new JButton("Sign up");
-		button_sign_up.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				SignUP n = new SignUP();
-				n.showFrame();
-			}
-		});
+		button_sign_up = new JButton("Sign up");
 		button_sign_up.setBounds(235, 195, 93, 23);
 		frame.getContentPane().add(button_sign_up);
+	}
+
+	public void addSignListener(ActionListener actionListener){
+		button_sign_in.addActionListener(actionListener);
+	}
+
+	public void addSignUpListener(ActionListener actionListener){
+		button_sign_up.addActionListener(actionListener);
+	}
+
+	public String getUsername(){
+		return textfield_username.getText();
+	}
+
+	public String getPassword(){
+		return String.valueOf(passwordField.getPassword());
+	}
+
+	public void showMessage(String message){
+		JOptionPane.showMessageDialog(frame, message);
+	}
+
+	public void openCustomerMain(){
+		CustomerMain M = new CustomerMain();
+		M.showFrame();
+		frame.dispose();
+	}
+
+	public void openManagerMain(){
+		ManagerMain tmp = new ManagerMain();
+		tmp.setVisible(true);
+		frame.dispose();
 	}
 }

@@ -1,19 +1,11 @@
 package view;
+import model.user.UserGender;
+
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
 import java.awt.BorderLayout;
-import javax.swing.SwingConstants;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
-import javax.swing.JCheckBox;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -26,6 +18,11 @@ public class SignUP {
 	private JPasswordField passwordField;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JTextField textField_Phone;
+	private JButton btn_confirm;
+	private JRadioButton rdbtn_Male;
+	private JRadioButton rdbtn_Female;
+	private JCheckBox chckbx_Checking;
+	private JCheckBox chckbx_Savings;
 
 	/**
 	 * Launch the application.
@@ -112,12 +109,12 @@ public class SignUP {
 		passwordField.setBounds(117, 174, 249, 21);
 		frame.getContentPane().add(passwordField);
 		
-		JRadioButton rdbtn_Male = new JRadioButton("Male");
+		rdbtn_Male = new JRadioButton("Male");
 		buttonGroup.add(rdbtn_Male);
 		rdbtn_Male.setBounds(251, 38, 54, 23);
 		frame.getContentPane().add(rdbtn_Male);
 		
-		JRadioButton rdbtn_Female = new JRadioButton("Female");
+		rdbtn_Female = new JRadioButton("Female");
 		buttonGroup.add(rdbtn_Female);
 		rdbtn_Female.setBounds(307, 38, 71, 23);
 		frame.getContentPane().add(rdbtn_Female);
@@ -126,11 +123,11 @@ public class SignUP {
 		lblNewLabel.setBounds(31, 254, 71, 15);
 		frame.getContentPane().add(lblNewLabel);
 		
-		JCheckBox chckbx_Checking = new JCheckBox("Checking");
+		chckbx_Checking = new JCheckBox("Checking");
 		chckbx_Checking.setBounds(117, 250, 80, 23);
 		frame.getContentPane().add(chckbx_Checking);
 		
-		JCheckBox chckbx_Savings = new JCheckBox("Savings");
+		chckbx_Savings = new JCheckBox("Savings");
 		chckbx_Savings.setBounds(222, 250, 71, 23);
 		frame.getContentPane().add(chckbx_Savings);
 		
@@ -143,7 +140,7 @@ public class SignUP {
 		frame.getContentPane().add(textField_Phone);
 		textField_Phone.setColumns(10);
 		
-		JButton btn_confirm = new JButton("Confirm");
+		btn_confirm = new JButton("Confirm");
 		btn_confirm.setBounds(79, 310, 93, 23);
 		frame.getContentPane().add(btn_confirm);
 		
@@ -155,5 +152,49 @@ public class SignUP {
 		});
 		btn_cancel.setBounds(273, 310, 93, 23);
 		frame.getContentPane().add(btn_cancel);
+	}
+
+	public void addConfirmListener(ActionListener actionListener){
+		btn_confirm.addActionListener(actionListener);
+	}
+
+	public String getName(){
+		return textField_Name.getText();
+	}
+
+	public String getAddress(){
+		return textField_Addr.getText();
+	}
+
+	public String getEmail(){
+		return textField_Email.getText();
+	}
+
+	public String getPassword(){
+		return String.valueOf(passwordField.getPassword());
+	}
+
+	public String getGender(){
+		if (rdbtn_Male.isSelected()){
+			return "male";
+		}else if (rdbtn_Female.isSelected()){
+			return "female";
+		}else return "";
+	}
+
+	public String getPhoneNum(){
+		return textField_Phone.getText();
+	}
+
+	public boolean isOpenChecking(){
+		return chckbx_Checking.isSelected();
+	}
+
+	public boolean isOpenSavings(){
+		return chckbx_Savings.isSelected();
+	}
+
+	public void showMessage(String message){
+		JOptionPane.showMessageDialog(frame, message);
 	}
 }
