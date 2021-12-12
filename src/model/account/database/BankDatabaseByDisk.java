@@ -75,4 +75,17 @@ public class BankDatabaseByDisk implements BankDatabase{
         }
         return bankDatabase;
     }
+
+    @Override
+    public void update() {
+        // TODO Auto-generated method stub
+        flush();
+    }
+
+    /**
+     * flush records to disk
+     */
+    private void flush() {
+        // TODO:
+    }
 }

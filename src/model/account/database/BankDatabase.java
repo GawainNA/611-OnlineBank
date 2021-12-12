@@ -38,4 +38,9 @@ public interface BankDatabase {
      */
     public Loan getLoanById(int id);
     
+
+    /**
+     * temporarily use this interface to notify a modification to database
+     */
+    public void update();
 }
