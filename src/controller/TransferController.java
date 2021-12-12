@@ -1,10 +1,11 @@
 package controller;
 
-import model.BankDatabaseByDisk;
 import view.Transfer;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import model.account.database.BankDatabaseByDisk;
 
 public class TransferController {
     BankDatabaseByDisk database;
