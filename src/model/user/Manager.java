@@ -32,14 +32,32 @@ public class Manager extends User{
         return manager;
     }
 
-    // view all transaction logs
-    public String viewTransactionLogs() {
-        // TODO: whether should return String???
-        return "";
-    }
-
     public void handleRequestedLoan(int loanId, boolean accept) {
         // TODO:
+    }
+
+    public List<Loan> getActivatedLoan() {
+        return activatedLoan;
+    }
+
+    public void setActivatedLoan(List<Loan> activatedLoan) {
+        this.activatedLoan = activatedLoan;
+    }
+
+    public List<Loan> getRequestedLoan() {
+        return requestedLoan;
+    }
+
+    public void setRequestedLoan(List<Loan> requestedLoan) {
+        this.requestedLoan = requestedLoan;
+    }
+
+    public void addRequestedLoan(Loan loan) {
+        requestedLoan.add(loan);
+    }
+
+    public void addActivatedLoan(Loan loan) {
+        activatedLoan.add(loan);
     }
 
 }
