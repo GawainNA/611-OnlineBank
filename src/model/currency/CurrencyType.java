@@ -5,7 +5,8 @@ import model.Persistable;
 public enum CurrencyType implements Persistable{
     DOLLAR("dollar", 1),
     CNY("cny", 6.5),
-    POUND("pound", 0.75);
+    POUND("pound", 0.75),
+    NOT_SUPPORTED_TYPE("not supported currency type", Double.MAX_VALUE);
 
     private String name;
     private double coefficient; // coefficient of currency, use in transfer between two different currency.
@@ -32,5 +33,23 @@ public enum CurrencyType implements Persistable{
         this.coefficient = coefficient;
     }
 
+
+    /**
+     * 
+     * @param str currency type in string format
+     * @return CurrencyType object corresponding to input string. 
+     *          return NOT_SUPPORTED_TYPE if input string is not a support currency type.
+     */
+    public static CurrencyType str2CurrencyType(String str) {
+        if(DOLLAR.getName().equalsIgnoreCase(str)) {
+            return DOLLAR;
+        } else if(CNY.getName().equalsIgnoreCase(str)) {
+            return CNY;
+        } else if(POUND.getName().equalsIgnoreCase(str)) {
+            return POUND;
+        }
+
+        return NOT_SUPPORTED_TYPE;
+    }
     
 }
