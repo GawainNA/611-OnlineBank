@@ -2,19 +2,20 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class ManagerMain extends JFrame {
 
 	private JPanel contentPane;
+	private String userID;
+	JButton btnLog;
+	JButton btnLoan;
+	JButton btnManageStocks;
+	JButton btnSignOut;
 
 	/**
 	 * Launch the application.
@@ -23,7 +24,7 @@ public class ManagerMain extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ManagerMain frame = new ManagerMain();
+					ManagerMain frame = new ManagerMain("31251");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,7 +36,8 @@ public class ManagerMain extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ManagerMain() {
+	public ManagerMain(String userID) {
+		this.userID = userID;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 362);
 		contentPane = new JPanel();
@@ -49,7 +51,7 @@ public class ManagerMain extends JFrame {
 		lblNewLabel.setBounds(104, 10, 229, 24);
 		contentPane.add(lblNewLabel);
 		
-		JButton btnLog = new JButton("Transactions Log");
+		btnLog = new JButton("Transactions Log");
 		btnLog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Transaction log = new Transaction();
@@ -59,7 +61,7 @@ public class ManagerMain extends JFrame {
 		btnLog.setBounds(0, 74, 143, 33);
 		contentPane.add(btnLog);
 		
-		JButton btnLoan = new JButton("Manage Loans");
+		btnLoan = new JButton("Manage Loans");
 		btnLoan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ManageLoan tmp = new ManageLoan();
@@ -69,7 +71,7 @@ public class ManagerMain extends JFrame {
 		btnLoan.setBounds(0, 158, 143, 33);
 		contentPane.add(btnLoan);
 		
-		JButton btnManageStocks = new JButton("Manage Stocks");
+		btnManageStocks = new JButton("Manage Stocks");
 		btnManageStocks.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ManageStock tmp = new ManageStock();
@@ -79,7 +81,7 @@ public class ManagerMain extends JFrame {
 		btnManageStocks.setBounds(291, 74, 143, 33);
 		contentPane.add(btnManageStocks);
 		
-		JButton btnSignOut = new JButton("Sign Out");
+		btnSignOut = new JButton("Sign Out");
 		btnSignOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Sign sign = new Sign();
@@ -89,5 +91,32 @@ public class ManagerMain extends JFrame {
 		});
 		btnSignOut.setBounds(291, 158, 143, 33);
 		contentPane.add(btnSignOut);
+	}
+	/*
+	private String userID;
+	JButton btnLog;
+	JButton btnLoan;
+	JButton btnManageStocks;
+	JButton btnSignOut;
+	 */
+
+	public String getUserID(){
+		return userID;
+	}
+
+	public void addLogListener(ActionListener actionListener){
+		btnLog.addActionListener(actionListener);
+	}
+
+	public void addLoanListener(ActionListener actionListener){
+		btnLoan.addActionListener(actionListener);
+	}
+
+	public void addManageStockListener(ActionListener actionListener){
+		btnManageStocks.addActionListener(actionListener);
+	}
+
+	public void addSignOutListener(ActionListener actionListener){
+		btnSignOut.addActionListener(actionListener);
 	}
 }

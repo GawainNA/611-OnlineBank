@@ -17,6 +17,10 @@ public class Transfer {
 	private JFrame frame;
 	private JTextField textField_AccountID;
 	private JTextField textField_Amount;
+	private String currentAccountID;
+	JComboBox comboBox;
+	JButton btnConfirm;
+	JButton btnCancel;
 
 	/**
 	 * Launch the application.
@@ -25,7 +29,7 @@ public class Transfer {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Transfer window = new Transfer();
+					Transfer window = new Transfer("1235");
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,8 +41,9 @@ public class Transfer {
 	/**
 	 * Create the application.
 	 */
-	public Transfer() {
+	public Transfer(String accountID) {
 		initialize();
+		currentAccountID = accountID;
 	}
 	
 	public void showFrame() {
@@ -82,7 +87,7 @@ public class Transfer {
 		frame.getContentPane().add(textField_Amount);
 		textField_Amount.setColumns(10);
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"USD", "JPY", "EUR", "RMB", "GBP"}));
 		comboBox.setBounds(287, 133, 54, 23);
 		frame.getContentPane().add(comboBox);
@@ -91,11 +96,11 @@ public class Transfer {
 		lblCurrency.setBounds(220, 137, 54, 15);
 		frame.getContentPane().add(lblCurrency);
 		
-		JButton btnConfirm = new JButton("Confirm");
+		btnConfirm = new JButton("Confirm");
 		btnConfirm.setBounds(109, 201, 93, 23);
 		frame.getContentPane().add(btnConfirm);
 		
-		JButton btnCancel = new JButton("Cancel");
+		btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -103,5 +108,25 @@ public class Transfer {
 		});
 		btnCancel.setBounds(248, 201, 93, 23);
 		frame.getContentPane().add(btnCancel);
+	}
+
+	public String getCurrentAccountID(){
+		return currentAccountID;
+	}
+
+	public String getAmount(){
+		return textField_Amount.getText();
+	}
+
+	public String getCurrency(){
+		return String.valueOf(comboBox.getSelectedItem());
+	}
+
+	public void addConfirmListener(ActionListener actionListener){
+		btnConfirm.addActionListener(actionListener);
+	}
+
+	public void addCancelListener(ActionListener actionListener){
+		btnCancel.addActionListener(actionListener);
 	}
 }
