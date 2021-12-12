@@ -1,5 +1,6 @@
 package model.user;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Persistable;
@@ -28,6 +29,17 @@ public abstract class User implements Persistable{
         this.passwd = passwd;
         this.address = address;
         this.phoneNum = phoneNum;
+        transactionList = new ArrayList<>();
+    }
+
+    public List<Transaction> getTransactionList() {
+        return transactionList;
+    }
+
+    // view all transaction logs
+    public List<String> viewTransactionLogs() {
+        // TODO: whether should return String???
+        return null;
     }
 
     public int getUid() {
