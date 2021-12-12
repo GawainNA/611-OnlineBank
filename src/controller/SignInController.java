@@ -26,11 +26,13 @@ public class SignInController {
             User user = bank.getUserByNameAndPasswd(sign.getUsername(), sign.getPassword());
             if(user == null){
                 sign.showMessage("Cannot finder this user!");
-            }else if (user instanceof Customer){
-
-                sign.openCustomerMain();
+            }else if (user instanceof Customer customer){
+                //Open CustomerMain
+                CustomerMain customerMain = new CustomerMain(customer.getUsername(),String.valueOf(customer.getUid()));
+                CustomerMainController customerMainController = new CustomerMainController(customer,customerMain);
+                customerMain.showFrame();
             }else {
-                sign.openManagerMain();
+                //open ManagerMain
             }
         }
     }

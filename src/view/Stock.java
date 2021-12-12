@@ -19,6 +19,12 @@ public class Stock extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField_Realized;
 	private JTextField textField_Unrealized;
+	private JTextArea txtrAvailiableStocks;
+	private JTextArea txtrYourStocks;
+	private String currentAccountID;
+	JButton btnBuy;
+	JButton btnSell;
+	JButton btnBack;
 
 	/**
 	 * Launch the application.
@@ -27,7 +33,7 @@ public class Stock extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Stock frame = new Stock();
+					Stock frame = new Stock("1231");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +45,8 @@ public class Stock extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Stock() {
+	public Stock(String currentAccountID) {
+		this.currentAccountID = currentAccountID;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 524);
 		contentPane = new JPanel();
@@ -57,12 +64,12 @@ public class Stock extends JFrame {
 		lblYourStocks.setBounds(31, 48, 82, 15);
 		contentPane.add(lblYourStocks);
 		
-		JTextArea txtrYourStocks = new JTextArea();
+		txtrYourStocks = new JTextArea();
 		txtrYourStocks.setText("Apple  1000  USD");
 		txtrYourStocks.setEditable(false);
 		txtrYourStocks.setBounds(31, 75, 371, 80);
 		contentPane.add(txtrYourStocks);
-		
+
 		JLabel lblRealizedProfit = new JLabel("Realized Profit");
 		lblRealizedProfit.setBounds(144, 48, 96, 15);
 		contentPane.add(lblRealizedProfit);
@@ -89,28 +96,70 @@ public class Stock extends JFrame {
 		lblNewLabel.setBounds(31, 241, 119, 15);
 		contentPane.add(lblNewLabel);
 		
-		JButton btnBuy = new JButton("Buy");
+		btnBuy = new JButton("Buy");
 		btnBuy.setBounds(168, 376, 93, 23);
 		contentPane.add(btnBuy);
 		
-		JButton btnSell = new JButton("Sell");
+		btnSell = new JButton("Sell");
 		btnSell.setBounds(168, 193, 93, 23);
 		contentPane.add(btnSell);
 		
-		JButton btnNewBack = new JButton("Back");
-		btnNewBack.addActionListener(new ActionListener() {
+		btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
-		btnNewBack.setBounds(309, 443, 93, 23);
-		contentPane.add(btnNewBack);
+		btnBack.setBounds(309, 443, 93, 23);
+		contentPane.add(btnBack);
 		
-		JTextArea txtrAvailiableStocks = new JTextArea();
+		txtrAvailiableStocks = new JTextArea();
 		txtrAvailiableStocks.setEditable(false);
 		txtrAvailiableStocks.setText("Apple  878  USD");
 		txtrAvailiableStocks.setBounds(31, 276, 371, 86);
 		contentPane.add(txtrAvailiableStocks);
 	}
 
+	/*
+	private JTextField textField_Realized;
+	private JTextField textField_Unrealized;
+	private JTextArea txtrAvailiableStocks;
+	private JTextArea txtrYourStocks;
+	private String currentAccountID;
+	JButton btnBuy;
+	JButton btnSell;
+	JButton btnNewBack;
+	 */
+
+	public void setTextField_Realized(String profit){
+		textField_Realized.setText(profit);
+	}
+
+	public void setTextField_Unrealized(String profit){
+		textField_Unrealized.setText(profit);
+	}
+
+	public void setTxtrAvailiableStocks(String profit){
+		txtrAvailiableStocks.setText(profit);
+	}
+
+	public void setTxtrYourStocks(String profit){
+		txtrYourStocks.setText(profit);
+	}
+
+	public String getCurrentAccountID(){
+		return currentAccountID;
+	}
+
+	public void addBuyListener(ActionListener actionListener){
+		btnBuy.addActionListener(actionListener);
+	}
+
+	public void addSellListener(ActionListener actionListener){
+		btnSell.addActionListener(actionListener);
+	}
+
+	public void addBackListener(ActionListener actionListener){
+		btnBack.addActionListener(actionListener);
+	}
 }

@@ -13,6 +13,12 @@ import javax.swing.SwingConstants;
 public class Security {
 
 	private JFrame frame;
+	JLabel lblid_Display;
+	JTextArea txtBalance;
+	JButton btnTransfer;
+	JButton btnCloseAccount;
+	JButton btnBack;
+	JButton btnStock;
 
 	/**
 	 * Launch the application.
@@ -21,7 +27,7 @@ public class Security {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Security window = new Security();
+					Security window = new Security("3123454");
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,8 +39,8 @@ public class Security {
 	/**
 	 * Create the application.
 	 */
-	public Security() {
-		initialize();
+	public Security(String accountID) {
+		initialize(accountID);
 	}
 	
 	public void showFrame() {
@@ -48,7 +54,7 @@ public class Security {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(String accountID) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 406);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,37 +70,31 @@ public class Security {
 		lblBalance.setBounds(26, 80, 75, 21);
 		frame.getContentPane().add(lblBalance);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setEditable(false);
-		textArea.setBounds(26, 112, 162, 233);
-		frame.getContentPane().add(textArea);
+		txtBalance = new JTextArea();
+		txtBalance.setEditable(false);
+		txtBalance.setBounds(26, 112, 162, 233);
+		frame.getContentPane().add(txtBalance);
 		
 		JLabel lblID = new JLabel("ID: ");
 		lblID.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		lblID.setBounds(151, 41, 35, 15);
 		frame.getContentPane().add(lblID);
 		
-		JLabel lblid_Display = new JLabel("817237333");
+		lblid_Display = new JLabel(accountID);
 		lblid_Display.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		lblid_Display.setHorizontalAlignment(SwingConstants.CENTER);
 		lblid_Display.setBounds(177, 41, 115, 15);
 		frame.getContentPane().add(lblid_Display);
 		
-		JButton btnTransfer = new JButton("Transfer");
-		btnTransfer.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TransferInside n = new TransferInside();
-				n.setVisible(true);
-			}
-		});
+		btnTransfer = new JButton("Transfer");
 		btnTransfer.setBounds(290, 113, 134, 30);
 		frame.getContentPane().add(btnTransfer);
 		
-		JButton btnCloseAccount = new JButton("Close Account");
+		btnCloseAccount = new JButton("Close Account");
 		btnCloseAccount.setBounds(290, 275, 134, 30);
 		frame.getContentPane().add(btnCloseAccount);
 		
-		JButton btnBack = new JButton("Back");
+		btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
@@ -103,14 +103,31 @@ public class Security {
 		btnBack.setBounds(290, 315, 134, 30);
 		frame.getContentPane().add(btnBack);
 		
-		JButton btnStock = new JButton("Stock");
-		btnStock.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Stock tmp = new Stock();
-				tmp.setVisible(true);
-			}
-		});
+		btnStock = new JButton("Stock");
 		btnStock.setBounds(290, 169, 134, 30);
 		frame.getContentPane().add(btnStock);
+	}
+	/*
+	JLabel lblid_Display;
+	JTextArea txtBalance;
+	JButton btnTransfer;
+	JButton btnCloseAccount;
+	JButton btnBack;
+	JButton btnStock;
+	 */
+	public void addTransferListener(ActionListener actionListener){
+		btnTransfer.addActionListener(actionListener);
+	}
+
+	public void addCloseAccountListener(ActionListener actionListener){
+		btnCloseAccount.addActionListener(actionListener);
+	}
+
+	public void addStockListener(ActionListener actionListener){
+		btnStock.addActionListener(actionListener);
+	}
+
+	public void addBackListener(ActionListener actionListener){
+		btnBack.addActionListener(actionListener);
 	}
 }

@@ -69,22 +69,21 @@ public class Sign {
 		label_welcome.setBounds(10, 10, 414, 38);
 		frame.getContentPane().add(label_welcome);
 		
-		JLabel lblEmail = new JLabel("Email: ");
-		lblEmail.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		lblEmail.setBounds(41, 86, 77, 15);
-		frame.getContentPane().add(lblEmail);
+		JLabel lblUserName = new JLabel("UserName");
+		lblUserName.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		lblUserName.setBounds(41, 86, 77, 15);
+		frame.getContentPane().add(lblUserName);
 		
-		JLabel label_password = new JLabel("Password: ");
-		label_password.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		label_password.setBounds(41, 142, 77, 15);
-		frame.getContentPane().add(label_password);
+		JLabel lblPassword = new JLabel("Password");
+		lblPassword.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+		lblPassword.setBounds(41, 142, 77, 15);
+		frame.getContentPane().add(lblPassword);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(115, 140, 213, 21);
 		frame.getContentPane().add(passwordField);
 		
 		textfield_username = new JTextField();
-		textfield_username.setToolTipText("Your Email Address");
 		textfield_username.setBounds(115, 84, 213, 21);
 		frame.getContentPane().add(textfield_username);
 		textfield_username.setColumns(10);
@@ -118,15 +117,6 @@ public class Sign {
 		JOptionPane.showMessageDialog(frame, message);
 	}
 
-	public void openCustomerMain(){
-		CustomerMain M = new CustomerMain();
-		M.showFrame();
-		frame.dispose();
-	}
 
-	public void openManagerMain(){
-		ManagerMain tmp = new ManagerMain();
-		tmp.setVisible(true);
-		frame.dispose();
-	}
+
 }

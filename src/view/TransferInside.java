@@ -22,6 +22,12 @@ public class TransferInside extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField_amount;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private String currentAccountID;
+	JComboBox comboBox;
+	JRadioButton rdbtnChecking;
+	JRadioButton rdbtnSavings;
+	JButton btnConfirm;
+	JButton btnCancel;
 
 	/**
 	 * Launch the application.
@@ -30,7 +36,7 @@ public class TransferInside extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TransferInside frame = new TransferInside();
+					TransferInside frame = new TransferInside("13122541");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +48,8 @@ public class TransferInside extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TransferInside() {
+	public TransferInside(String accountID) {
+		currentAccountID = accountID;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -74,7 +81,7 @@ public class TransferInside extends JFrame {
 		lblCurrency.setBounds(197, 91, 54, 15);
 		contentPane.add(lblCurrency);
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"USD", "JPY", "EUR", "RMB", "GBP"}));
 		comboBox.setBounds(261, 87, 54, 23);
 		contentPane.add(comboBox);
@@ -83,21 +90,21 @@ public class TransferInside extends JFrame {
 		lblNewLabel.setBounds(62, 145, 73, 15);
 		contentPane.add(lblNewLabel);
 		
-		JRadioButton rdbtnChecking = new JRadioButton("Checking");
+		rdbtnChecking = new JRadioButton("Checking");
 		buttonGroup.add(rdbtnChecking);
 		rdbtnChecking.setBounds(141, 141, 86, 23);
 		contentPane.add(rdbtnChecking);
 		
-		JRadioButton rdbtnSavings = new JRadioButton("Savings");
+		rdbtnSavings = new JRadioButton("Savings");
 		buttonGroup.add(rdbtnSavings);
 		rdbtnSavings.setBounds(229, 141, 79, 23);
 		contentPane.add(rdbtnSavings);
 		
-		JButton btnConfirm = new JButton("Confirm");
+		btnConfirm = new JButton("Confirm");
 		btnConfirm.setBounds(99, 187, 93, 23);
 		contentPane.add(btnConfirm);
 		
-		JButton btnCancel = new JButton("Cancel");
+		btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -106,4 +113,42 @@ public class TransferInside extends JFrame {
 		btnCancel.setBounds(238, 187, 93, 23);
 		contentPane.add(btnCancel);
 	}
+
+	/*
+	private JTextField textField_amount;
+	private String accountID;
+	JComboBox comboBox;
+	JRadioButton rdbtnChecking;
+	JRadioButton rdbtnSavings;
+	JButton btnConfirm;
+	JButton btnCancel;
+	 */
+	public String getCurrentAccountID(){
+		return currentAccountID;
+	}
+
+	public String getAmount(){
+		return textField_amount.getText();
+	}
+
+	public String getCurrency(){
+		return String.valueOf(comboBox.getSelectedItem());
+	}
+
+	public boolean isCheckingSelected(){
+		return rdbtnChecking.isSelected();
+	}
+
+	public boolean isSavingSelected(){
+		return rdbtnSavings.isSelected();
+	}
+
+	public void addConfirmListener(ActionListener actionListener){
+		btnConfirm.addActionListener(actionListener);
+	}
+
+	public void addCancelListener(ActionListener actionListener){
+		btnCancel.addActionListener(actionListener);
+	}
+
 }

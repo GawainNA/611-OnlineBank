@@ -1,18 +1,27 @@
 package view;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
 import java.awt.Font;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class CustomerMain {
 
 	private JFrame frame;
+	private JButton btnChecking;
+	private JButton btnSavings;
+	JButton btnLoan;
+	JButton btnSecurityAccount;
+	JButton btnSignOut;
+	JButton btnOpenAccount;
+	JButton btnTranscationLog;
+	JLabel lblUserName;
+	JLabel lblUIDDisplay;
+
+
+
 
 	/**
 	 * Launch the application.
@@ -21,7 +30,7 @@ public class CustomerMain {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CustomerMain window = new CustomerMain();
+					CustomerMain window = new CustomerMain("Gawain","123");
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,8 +42,8 @@ public class CustomerMain {
 	/**
 	 * Create the application.
 	 */
-	public CustomerMain() {
-		initialize();
+	public CustomerMain(String userName,String userId) {
+		initialize(userName,userId);
 	}
 	
 	public void showFrame() {
@@ -48,59 +57,41 @@ public class CustomerMain {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(String userName,String userId) {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 508);
+		frame.setBounds(100, 100, 450, 396);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Welcome Gawain!");
-		lblNewLabel.setFont(new Font("Times New Roman", Font.PLAIN, 18));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(120, 10, 190, 21);
-		frame.getContentPane().add(lblNewLabel);
-		
-		JButton btnChecking = new JButton("Checking Account");
-		btnChecking.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Checking n = new Checking();
-				n.showFrame();
-			}
-		});
-		btnChecking.setBounds(0, 206, 145, 33);
+		JLabel lblHeadline = new JLabel("Welcome");
+		lblHeadline.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		lblHeadline.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHeadline.setBounds(133, 10, 93, 21);
+		frame.getContentPane().add(lblHeadline);
+
+		btnChecking = new JButton("Checking Account");
+		btnChecking.setBounds(0, 102, 145, 33);
 		frame.getContentPane().add(btnChecking);
 		
-		JButton btnLoan = new JButton("Loan");
+		btnLoan = new JButton("Loan");
 		btnLoan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Loan tmp = new Loan();
 				tmp.setVisible(true);
 			}
 		});
-		btnLoan.setBounds(289, 206, 145, 33);
+		btnLoan.setBounds(289, 102, 145, 33);
 		frame.getContentPane().add(btnLoan);
 		
-		JButton btnSavings = new JButton("Savings Account");
-		btnSavings.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Savings n = new Savings();
-				n.showFrame();
-			}
-		});
-		btnSavings.setBounds(0, 263, 145, 33);
+		btnSavings = new JButton("Savings Account");
+		btnSavings.setBounds(0, 167, 145, 33);
 		frame.getContentPane().add(btnSavings);
 		
-		JButton btnSecurityAccount = new JButton("Security Account");
-		btnSecurityAccount.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Security S = new Security();
-				S.showFrame();
-			}
-		});
-		btnSecurityAccount.setBounds(0, 321, 145, 33);
+		btnSecurityAccount = new JButton("Security Account");
+		btnSecurityAccount.setBounds(0, 230, 145, 33);
 		frame.getContentPane().add(btnSecurityAccount);
 		
-		JButton btnSignOut = new JButton("Sign Out");
+		btnSignOut = new JButton("Sign Out");
 		btnSignOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Sign s = new Sign();
@@ -108,35 +99,66 @@ public class CustomerMain {
 				close();
 			}
 		});
-		btnSignOut.setBounds(175, 418, 93, 23);
+		btnSignOut.setBounds(168, 314, 93, 23);
 		frame.getContentPane().add(btnSignOut);
 		
-		JLabel lblEmail = new JLabel("Email Address: ");
-		lblEmail.setBounds(49, 58, 96, 15);
-		frame.getContentPane().add(lblEmail);
+		JLabel lblUserID = new JLabel("User ID : ");
+		lblUserID.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblUserID.setBounds(86, 58, 96, 15);
+		frame.getContentPane().add(lblUserID);
 		
-		JLabel lblEmailDisplay = new JLabel("gawain7@bu.edu");
-		lblEmailDisplay.setBounds(155, 58, 155, 15);
-		frame.getContentPane().add(lblEmailDisplay);
+		lblUIDDisplay = new JLabel(userId);
+		lblUIDDisplay.setBounds(192, 58, 155, 15);
+		frame.getContentPane().add(lblUIDDisplay);
 		
-		JLabel lblPhone = new JLabel("Phone: ");
-		lblPhone.setBounds(49, 83, 54, 15);
-		frame.getContentPane().add(lblPhone);
-		
-		JLabel lblPhoneDisplay = new JLabel("6178346244");
-		lblPhoneDisplay.setBounds(155, 83, 155, 15);
-		frame.getContentPane().add(lblPhoneDisplay);
-		
-		JButton btnPInfo = new JButton("Update Personal Info");
-		btnPInfo.setBounds(137, 108, 173, 33);
-		frame.getContentPane().add(btnPInfo);
-		
-		JButton btnOpenAccount = new JButton("Open Account");
-		btnOpenAccount.setBounds(289, 263, 145, 33);
+		btnOpenAccount = new JButton("Open Account");
+		btnOpenAccount.setBounds(289, 167, 145, 33);
 		frame.getContentPane().add(btnOpenAccount);
 		
-		JButton btnTranscationLog = new JButton("Transcation Log");
-		btnTranscationLog.setBounds(289, 321, 145, 33);
+		btnTranscationLog = new JButton("Transcation Log");
+		btnTranscationLog.setBounds(289, 230, 145, 33);
 		frame.getContentPane().add(btnTranscationLog);
+		
+		lblUserName = new JLabel(userName);
+		lblUserName.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+		lblUserName.setBounds(223, 10, 87, 20);
+		frame.getContentPane().add(lblUserName);
 	}
+
+	public void addCheckingListener(ActionListener actionListener){
+		btnChecking.addActionListener(actionListener);
+	}
+
+	public void addSavingsListener(ActionListener actionListener){
+		btnSavings.addActionListener(actionListener);
+	}
+
+	public void addLoanListener(ActionListener actionListener){
+		btnLoan.addActionListener(actionListener);
+	}
+
+	public void addSecurityListener(ActionListener actionListener){
+		btnSecurityAccount.addActionListener(actionListener);
+	}
+
+	public void addSignOutListener(ActionListener actionListener){
+		btnSignOut.addActionListener(actionListener);
+	}
+
+	public void addOpenAccountListener(ActionListener actionListener){
+		btnOpenAccount.addActionListener(actionListener);
+	}
+
+	public void addTransactionListener(ActionListener actionListener){
+		btnTranscationLog.addActionListener(actionListener);
+	}
+
+	public String getUserName(){
+		return lblUserName.getText();
+	}
+
+	public String getUserId(){
+		return lblUIDDisplay.getText();
+	}
+
 }
