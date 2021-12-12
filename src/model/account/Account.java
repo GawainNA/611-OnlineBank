@@ -68,4 +68,16 @@ public abstract class Account{
         return currencyMap.get(currencyType);
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public boolean isClosed() {
+        return isClosed;
+    }
+
+    public void setClosed(boolean isClosed) {
+        this.isClosed = isClosed;
+    }
+
 }
