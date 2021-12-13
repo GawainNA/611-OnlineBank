@@ -3,6 +3,7 @@ package model.user;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Bank;
 import model.Collateral;
 import model.ErrCode;
 import model.Loan;
@@ -40,6 +41,7 @@ public class Customer extends User {
             return errCode;
         }
         checkingAccount = AccountFactory.getInstance().createCheckingAccount();
+        Bank.getInstance().getBankDatabase().update();
         return errCode;
     }
 
@@ -55,6 +57,7 @@ public class Customer extends User {
             return errCode;
         }
         savingAccount = AccountFactory.getInstance().createSavingAccount();
+        Bank.getInstance().getBankDatabase().update();
         return errCode;
     }
 
@@ -65,7 +68,6 @@ public class Customer extends User {
      *         return true.
      */
     public ErrCode openSecurityAccount() {
-        // TODO:
         ErrCode errCode = new ErrCode(true, "success");
         // security account already exist, cannot open
         if (securityAccount != null) {
@@ -90,6 +92,7 @@ public class Customer extends User {
 
         // sucessfully open security account
         securityAccount = AccountFactory.getInstance().createSecurityAccount();
+        Bank.getInstance().getBankDatabase().update();
         return errCode;
     }
 
