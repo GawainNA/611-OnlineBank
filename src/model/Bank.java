@@ -106,6 +106,7 @@ public class Bank {
             newCustomer.openSavingAccount();
         }
         username2CustomerMap.put(username, newCustomer);
+        bankDatabase.update();
         return true;
     }
 }
