@@ -123,6 +123,9 @@ public class BankDatabaseByDisk implements BankDatabase, Persistable {
      * because three map attributes are transient, they need to reconstruct after deserialize
      */
     private void initAfterDeserialize() {
+        idCustomerMap = new HashMap<>();
+        idAccountMap = new HashMap<>();
+        idLoanMap = new HashMap<>();
         for(Customer customer : customerList) {
             // init customer map
             idCustomerMap.put(customer.getUid(), customer);
