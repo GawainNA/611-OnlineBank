@@ -1,5 +1,6 @@
 package model.user;
 
+import model.Bank;
 
 /**
  * Factory to create customer. CustomerFactory is a singleton
@@ -24,10 +25,9 @@ public class CustomerFactory {
             String passwd,
             String address,
             String phoneNum) {
-        // TODO: create a new customer, also need to persistence in file
         Customer newCustomer = new Customer(username, gender, passwd, address, phoneNum);
-        // TODO: add to warehouse
-
+        // TODO: add to database
+        Bank.getInstance().getBankDatabase().addCustomer(newCustomer);
         return newCustomer;
     }
 }
