@@ -1,9 +1,10 @@
 package model;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 
-import model.Bank;
 import model.database.BankDatabase;
 import model.user.Customer;
 import model.user.User;
@@ -11,6 +12,7 @@ import model.user.UserGender;
 
 public class BankTest {
     private Bank bank = Bank.getInstance();
+    // private Bank bank;
 
     private String username = "test1";
     private UserGender gender = UserGender.FEMALE;
@@ -21,8 +23,10 @@ public class BankTest {
     private boolean openCheckingAccount = false;
     private boolean openSavingAccount = false;
 
+
     @Test
-    public void addUser() {
+    public void testAddUser() {
+        // bank = Bank.getInstance();
         boolean isSuccess = bank.addCustomer(username, 
             gender, 
             address, 
@@ -44,5 +48,14 @@ public class BankTest {
         Assert.assertNotNull(customer);
     }
 
-    
+    @Test
+    public void testPersistence() {
+        // after doing testAddUser(), customer should be store in file
+        BankDatabase bankDatabase = bank.getBankDatabase();
+
+        List<Customer> allCustomers = bankDatabase.getAllCustomer();
+        // allCustomers should not be empty
+        Assert.assertFalse(allCustomers.isEmpty());
+        
+    }
 }   
