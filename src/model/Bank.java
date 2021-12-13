@@ -16,6 +16,8 @@ import model.user.UserGender;
  * Singleton
  */
 public class Bank {
+    public static double SAVING_ACCOUNT_INTEREST = 0.05;
+
     private static Bank bank;
     
     private Manager manager;

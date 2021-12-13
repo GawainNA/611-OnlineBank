@@ -1,5 +1,6 @@
 package model.account;
 
+import model.Bank;
 
 /**
  * use factory pattern to create account. AccountFactory is a singleton
@@ -19,17 +20,20 @@ public class AccountFactory{
     }
 
     public CheckingAccount createCheckingAccount() {
-        // TODO:
-        return null;
+        CheckingAccount checkingAccount = new CheckingAccount();
+        Bank.getInstance().getBankDatabase().addAccount(checkingAccount);
+        return checkingAccount;
     }
 
     public SavingAccount createSavingAccount() {
-        // TODO:
-        return null;
+        SavingAccount savingAccount = new SavingAccount(Bank.SAVING_ACCOUNT_INTEREST);
+        Bank.getInstance().getBankDatabase().addAccount(savingAccount);
+        return savingAccount;
     }
 
     public SecurityAccount createSecurityAccount() {
-        // TODO:
-        return null;
+        SecurityAccount securityAccount = new SecurityAccount();
+        Bank.getInstance().getBankDatabase().addAccount(securityAccount);
+        return securityAccount;
     }
 }
