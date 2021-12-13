@@ -19,13 +19,25 @@ public class Bank {
     private static Bank bank;
     
     private Manager manager;
-    private transient Map<String, Customer> username2CustomerMap;
+    private Map<String, Customer> username2CustomerMap;
     private BankDatabase bankDatabase;
 
     private Bank() {
-        manager = Manager.getInstance();
-        username2CustomerMap = new HashMap<>();
         setBankDatabase(BankDatabaseByDisk.getInstance());
+        initManager();
+        initUsername2CustomerMap();
+    }
+
+    private void initManager() {
+        manager = bankDatabase.getManager();
+    }
+
+    private void initUsername2CustomerMap() {
+        username2CustomerMap = new HashMap<>();
+        List<Customer> customerList = bankDatabase.getAllCustomer();
+        for(Customer customer : customerList) {
+            username2CustomerMap.put(customer.getUsername(), customer);
+        }
     }
 
     public BankDatabase getBankDatabase() {
