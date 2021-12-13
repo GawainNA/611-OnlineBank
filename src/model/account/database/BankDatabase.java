@@ -1,8 +1,12 @@
 package model.account.database;
 
+import java.util.List;
+
 import model.Loan;
 import model.account.Account;
 import model.user.Customer;
+import model.user.Manager;
+import view.ManageLoan;
 
 // TODO: add add***() methods   C
 // TODO: add delete***() methods    D
@@ -43,4 +47,39 @@ public interface BankDatabase {
      * temporarily use this interface to notify a modification to database
      */
     public void update();
+
+
+    /**
+     * 
+     * @param customer new customer add to database
+     */
+    public void addCustomer(Customer customer);
+
+
+    /**
+     * 
+     * @param account new account add to database
+     */
+    public void addAccount(Account account);
+
+
+    /**
+     * 
+     * @param loan new loan add to database
+     */
+    public void addLoan(Loan loan);
+
+
+    /**
+     * 
+     * @return manager of this bank
+     */
+    public Manager getManager();
+
+
+    /**
+     * 
+     * @return all customers of this bank
+     */
+    public List<Customer> getAllCustomer();
 }
