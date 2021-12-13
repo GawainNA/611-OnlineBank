@@ -26,4 +26,12 @@ public class Currency implements Persistable{
     public void setAmount(double amount) {
         this.amount = amount;
     }
+
+    public void add(Currency addition) {
+        amount += addition.amount;
+    }
+
+    public void minus(Currency minus) {
+        amount -= minus.amount;
+    }
 }

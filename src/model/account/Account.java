@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import model.Bank;
 import model.ErrCode;
 import model.Persistable;
 import model.currency.Currency;
@@ -13,7 +14,7 @@ import util.IdCreator;
 /**
  * abstract class of account
  */
-public abstract class Account{
+public abstract class Account implements Persistable{
     private int id;
     private Map<CurrencyType, Currency> currencyMap;
     private boolean isClosed;
@@ -31,10 +32,45 @@ public abstract class Account{
      * @param currencyType: currency type
      * @return if destId doesn't exist, or do not have enough money to transfer, return false. else return true.
      */
-    public ErrCode transfer(int destId, double amount, CurrencyType currencyType) {
-        // TODO:
-        
+    public ErrCode transferTo(int destId, double amount, CurrencyType currencyType) {
+        ErrCode errCode = new ErrCode(true, "success");
+        // check whether have enough money
+        if(!currencyMap.containsKey(currencyType) || 
+            currencyMap.get(currencyType).getAmount() < amount) {
+
+            errCode.errMsg = String.format("do not have enough money on type %s", currencyType.getName());
+            errCode.isSuccess = false;
+            return errCode;
+        }
+
+        // check whether destId is valid
+        Account destAccount = Bank.getInstance().getBankDatabase().getAccountById(destId);
+        if(destAccount == null) {
+            errCode.errMsg = "destinate account does not exist";
+            errCode.isSuccess = false;
+            return errCode;
+        }
+
+        // if all valid, transfer
+        Currency transferCurrency = new Currency(currencyType, amount);
+        destAccount.addCurrency(transferCurrency);
+        this.minusCurrency(transferCurrency);
+
+        // update database
+        Bank.getInstance().getBankDatabase().update();
         return null;
+    }
+
+    protected void addCurrency(Currency currency) {
+        CurrencyType currencyType = currency.getCurrencyType();
+        if(!currencyMap.containsKey(currencyType)) {
+            currencyMap.put(currencyType, new Currency(currencyType, 0));
+        }
+        currencyMap.get(currencyType).add(currency);
+    }
+
+    protected void minusCurrency(Currency currency) {
+        currencyMap.get(currency.getCurrencyType()).minus(currency);
     }
 
     /**
@@ -44,9 +80,7 @@ public abstract class Account{
      * @return if destId doesn't exist, or do not have enough money to transfer, return false. else return true.
      */
     public ErrCode transfer(int destId, Currency currency) {
-        // TODO:
-        
-        return null;
+        return transferTo(destId, currency.getAmount(), currency.getCurrencyType());
     }
 
 
