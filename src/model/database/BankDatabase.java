@@ -1,4 +1,4 @@
-package model.account.database;
+package model.database;
 
 import java.util.List;
 

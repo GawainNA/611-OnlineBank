@@ -5,7 +5,7 @@ import view.Transfer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import model.account.database.BankDatabaseByDisk;
+import model.database.BankDatabaseByDisk;
 
 public class TransferController {
     BankDatabaseByDisk database;

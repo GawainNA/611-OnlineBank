@@ -1,4 +1,4 @@
-package model.account.database;
+package model.database;
 
 import java.io.File;
 import java.io.FileInputStream;

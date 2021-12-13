@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import model.account.database.BankDatabase;
-import model.account.database.BankDatabaseByDisk;
+import model.database.BankDatabase;
+import model.database.BankDatabaseByDisk;
 import model.user.Customer;
 import model.user.CustomerFactory;
 import model.user.Manager;
