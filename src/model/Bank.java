@@ -93,7 +93,11 @@ public class Bank {
                                 String phoneNum,
                                 boolean openCheckingAccount,
                                 boolean openSavingAccount) {
-        // TODO: first to see whether already have customer with same username
+        // first to see whether already have customer with same username
+        if(username2CustomerMap.containsKey(username)) {
+            return false;
+        }
+        
         Customer newCustomer = CustomerFactory.getInstance().createCustomer(username, gender, email, passwd, address, phoneNum);
         if(openCheckingAccount) { 
             newCustomer.openCheckingAccount();
