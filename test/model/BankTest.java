@@ -12,7 +12,6 @@ import model.user.UserGender;
 
 public class BankTest {
     private Bank bank = Bank.getInstance();
-    // private Bank bank;
 
     private String username = "test1";
     private UserGender gender = UserGender.FEMALE;
@@ -56,6 +55,7 @@ public class BankTest {
         List<Customer> allCustomers = bankDatabase.getAllCustomer();
         // allCustomers should not be empty
         Assert.assertFalse(allCustomers.isEmpty());
-        
+        // delete file after test
+        bankDatabase.clear();
     }
 }   
