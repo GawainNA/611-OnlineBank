@@ -24,6 +24,10 @@ public class Customer extends User {
         loanList = new ArrayList<>();
     }
 
+    public List<Loan> getLoanList() {
+        return loanList;
+    }
+
     /**
      * 
      * @return if already have checking account, return false. else return true.
