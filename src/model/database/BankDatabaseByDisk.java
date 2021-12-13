@@ -230,4 +230,18 @@ public class BankDatabaseByDisk implements BankDatabase, Persistable {
     public List<Customer> getAllCustomer() {
         return getCustomerList();
     }
+
+
+    @Override
+    public void clear() {
+        // clear attribute
+        customerList = new ArrayList<>();
+        manager = Manager.getInstance();
+        idAccountMap.clear();
+        idCustomerMap.clear();
+        idLoanMap.clear();
+        // delete local file
+        File f = new File(STORAGE_FILEPATH);
+        f.delete();
+    }
 }

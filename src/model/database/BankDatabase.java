@@ -82,4 +82,10 @@ public interface BankDatabase {
      * @return all customers of this bank
      */
     public List<Customer> getAllCustomer();
+
+
+    /**
+     * clear all information of database
+     */
+    public void clear();
 }
