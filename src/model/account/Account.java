@@ -58,7 +58,7 @@ public abstract class Account implements Persistable{
 
         // update database
         Bank.getInstance().getBankDatabase().update();
-        return null;
+        return errCode;
     }
 
     protected void addCurrency(Currency currency) {
@@ -79,7 +79,7 @@ public abstract class Account implements Persistable{
      * @param currency: currency to transfer
      * @return if destId doesn't exist, or do not have enough money to transfer, return false. else return true.
      */
-    public ErrCode transfer(int destId, Currency currency) {
+    public ErrCode transferTo(int destId, Currency currency) {
         return transferTo(destId, currency.getAmount(), currency.getCurrencyType());
     }
 
