@@ -8,7 +8,7 @@ import model.stock.StockMarket;
 
 public class SecurityAccount extends Account {
     private StockMarket stockMarket;
-    private List<Stock> stocks;
+    private List<Stock> stockList;
     private double realizedProfit;
     private double unrealizedProfit;
 
@@ -16,6 +16,10 @@ public class SecurityAccount extends Account {
         // TODO:
 
         return null;
+    }
+
+    public List<Stock> getStockList() {
+        return stockList;
     }
 
     public ErrCode sellStock(Stock stock) {
