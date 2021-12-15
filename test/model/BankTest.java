@@ -3,10 +3,8 @@ package model;
 import java.io.File;
 import java.util.List;
 
-import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -179,6 +177,42 @@ public class BankTest {
         Assert.assertTrue(errCode.isSuccess);
 
         // now checking account and saving account do not have money
+    }
+
+    @Test
+    public void gtestCloseAccount() {
+        // this customer should have saving account and checking account
+        // with no money inside
+        Customer customer = bankDatabase.getAllCustomer().get(0);
+        
+        CheckingAccount checkingAccount = customer.getCheckingAccount();
+        SavingAccount savingAccount = customer.getSavingAccount();
+
+        // deposit 20 dollars into checking account
+        checkingAccount.deposit(20, CurrencyType.DOLLAR);
+        // then try to close checking account, should fail
+        ErrCode errCode = customer.closeCheckingAccount();
+        Assert.assertFalse(errCode.isSuccess);
+        
+        // withdraw 20 dollars from checking account, should success
+        errCode = checkingAccount.withdraw(20, CurrencyType.DOLLAR);
+        Assert.assertTrue(errCode.isSuccess);
+        // then try to close checking account, should success
+        errCode = customer.closeCheckingAccount();
+        Assert.assertTrue(errCode.isSuccess);
+
+        // deposit 20 dollars to saving account
+        savingAccount.deposit(20, CurrencyType.DOLLAR);
+        // try to transfer to checking account, should fail because checking account already close
+        errCode = savingAccount.transferTo(checkingAccount.getId(), 20, CurrencyType.DOLLAR);
+        Assert.assertFalse(errCode.isSuccess);
+        // withdraw money, should success
+        errCode = savingAccount.withdraw(20, CurrencyType.DOLLAR);
+        Assert.assertTrue(errCode.isSuccess);
+
+        // reopen checking account, should success
+        errCode = customer.openCheckingAccount();
+        Assert.assertTrue(errCode.isSuccess);
     }
 
     @AfterClass
