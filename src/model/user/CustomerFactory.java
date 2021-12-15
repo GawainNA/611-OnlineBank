@@ -26,7 +26,6 @@ public class CustomerFactory {
             String address,
             String phoneNum) {
         Customer newCustomer = new Customer(username, gender, passwd, address, phoneNum);
-        // TODO: add to database
         Bank.getInstance().getBankDatabase().addCustomer(newCustomer);
         return newCustomer;
     }
