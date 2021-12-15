@@ -51,6 +51,13 @@ public abstract class Account implements Persistable{
             return errCode;
         }
 
+        // check whether destAccount has closed already
+        if(destAccount.isClosed) {
+            errCode.errMsg = "destinate account has been closed, cannot transfer to";
+            errCode.isSuccess = false;
+            return errCode;
+        }
+
         // if all valid, transfer
         Currency transferCurrency = new Currency(currencyType, amount);
         destAccount.addCurrency(transferCurrency);
