@@ -7,6 +7,7 @@ import model.Bank;
 import model.Collateral;
 import model.ErrCode;
 import model.Loan;
+import model.account.Account;
 import model.account.AccountFactory;
 import model.account.CheckingAccount;
 import model.account.SavingAccount;
@@ -101,9 +102,28 @@ public class Customer extends User {
      * @return account can be closed only if the deposit of account is 0.
      */
     public ErrCode closeCheckingAccount() {
-        // TODO:
+        ErrCode errCode = new ErrCode(true, "success");
+        // check whether has checking account
+        if (checkingAccount == null) {
+            errCode.isSuccess = false;
+            errCode.errMsg = "do not have checking account, cannot close";
+            return errCode;
+        }
+        // check whether deposit is 0
+        List<CurrencyType> notZeroCurrencyType = getNotZeroCurrencyType(checkingAccount);
+        if (!notZeroCurrencyType.isEmpty()) {
+            errCode.isSuccess = false;
+            errCode.errMsg = String.format("%s currency is not 0. please withdraw before close",
+                    notZeroCurrencyType.get(0).getName());
+            return errCode;
+        }
 
-        return null;
+        // close account
+        checkingAccount.setClosed(true);
+        checkingAccount = null;
+
+        Bank.getInstance().getBankDatabase().update();
+        return errCode;
     }
 
     /**
@@ -111,9 +131,36 @@ public class Customer extends User {
      * @return account can be closed only if the deposit of account is 0.
      */
     public ErrCode closeSavingAccount() {
-        // TODO:
+        ErrCode errCode = new ErrCode(true, "success");
+        // check whether has saving account
+        if (savingAccount == null) {
+            errCode.isSuccess = false;
+            errCode.errMsg = "do not have saving account, cannot close";
+            return errCode;
+        }
+        // check whether deposit is 0
+        List<CurrencyType> notZeroCurrencyType = getNotZeroCurrencyType(savingAccount);
+        if (!notZeroCurrencyType.isEmpty()) {
+            errCode.isSuccess = false;
+            errCode.errMsg = String.format("%s currency is not 0. please withdraw before close",
+                    notZeroCurrencyType.get(0).getName());
+            return errCode;
+        }
 
-        return null;
+        // check whether has security account
+        // cannot close saving account if there is security account
+        if (securityAccount != null) {
+            errCode.isSuccess = false;
+            errCode.errMsg = "there is security account. close security account before close saving accouint";
+            return errCode;
+        }
+
+        // close account
+        savingAccount.setClosed(true);
+        savingAccount = null;
+
+        Bank.getInstance().getBankDatabase().update();
+        return errCode;
     }
 
     /**
@@ -124,8 +171,51 @@ public class Customer extends User {
      */
     public ErrCode closeSecurityAccount() {
         // TODO:
+        ErrCode errCode = new ErrCode(true, "success");
+        // check whether there is security account
+        if (securityAccount == null) {
+            errCode.isSuccess = false;
+            errCode.errMsg = "do not have security account, cannot close";
+            return errCode;
+        }
+        // check whether the deposit is 0
+        List<CurrencyType> notZeroCurrencyType = getNotZeroCurrencyType(securityAccount);
+        if (!notZeroCurrencyType.isEmpty()) {
+            errCode.isSuccess = false;
+            errCode.errMsg = String.format("%s currency is not 0. please withdraw before close",
+                    notZeroCurrencyType.get(0).getName());
+            return errCode;
+        }
 
-        return null;
+        // check whether there is stock not sell
+        if(!securityAccount.getStockList().isEmpty()) {
+            errCode.isSuccess = false;
+            errCode.errMsg = "please sell all stocks before closing.";
+            return errCode;
+        }
+
+        // close account
+        securityAccount.setClosed(true);
+        securityAccount = null;
+
+        Bank.getInstance().getBankDatabase().update();
+        return errCode;
+    }
+
+    /**
+     * 
+     * @param account account to check
+     * @return given an account, return all currency types that the amount of
+     *         specific currency amount is not 0
+     */
+    private List<CurrencyType> getNotZeroCurrencyType(Account account) {
+        List<CurrencyType> res = new ArrayList<>();
+        for (CurrencyType currencyType : account.getAllCurrencyType()) {
+            if (account.getCurrencyByType(currencyType).getAmount() != 0) {
+                res.add(currencyType);
+            }
+        }
+        return res;
     }
 
     /**
