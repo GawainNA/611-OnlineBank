@@ -102,25 +102,26 @@ public class Checking {
 		frame.getContentPane().add(btnBack);
 		
 		btnWithdraw = new JButton("WithDraw");
-		btnWithdraw.setBounds(151, 414, 105, 30);
+		btnWithdraw.setBounds(213, 414, 105, 30);
 		frame.getContentPane().add(btnWithdraw);
 		
 		JLabel lblNewLabel_1 = new JLabel("Amount");
-		lblNewLabel_1.setBounds(26, 374, 48, 15);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(26, 374, 59, 15);
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		txtAmount = new JTextField();
-		txtAmount.setBounds(69, 371, 66, 21);
+		txtAmount.setBounds(94, 371, 75, 21);
 		frame.getContentPane().add(txtAmount);
 		txtAmount.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Currency");
-		lblNewLabel_2.setBounds(141, 374, 54, 15);
+		lblNewLabel_2.setBounds(179, 374, 54, 15);
 		frame.getContentPane().add(lblNewLabel_2);
 
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"dollar","cny","pound"}));
-		comboBox.setBounds(205, 370, 51, 23);
+		comboBox.setBounds(243, 370, 75, 23);
 		frame.getContentPane().add(comboBox);
 	}
 

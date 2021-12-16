@@ -58,6 +58,7 @@ public class Transaction extends JFrame {
 		contentPane.add(scrollPane);
 		
 		textArea_Log = new JTextArea();
+		textArea_Log.setEditable(false);
 		scrollPane.setViewportView(textArea_Log);
 	}
 

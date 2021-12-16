@@ -81,7 +81,7 @@ public class Transfer {
 		
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"dollar","cny","pound"}));
-		comboBox.setBounds(287, 133, 54, 23);
+		comboBox.setBounds(287, 133, 70, 23);
 		frame.getContentPane().add(comboBox);
 		
 		JLabel lblCurrency = new JLabel("Currency");

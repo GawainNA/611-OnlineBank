@@ -5,6 +5,7 @@ import model.user.Manager;
 import view.ManageLoan;
 import view.ManagerMain;
 import view.Sign;
+import view.Transaction;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,7 +37,9 @@ public class ManagerMainController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            Transaction transactionView = new Transaction();
+            TransactionController controller = new TransactionController(manager,transactionView);
+            transactionView.setVisible(true);
         }
     }
 

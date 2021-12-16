@@ -73,7 +73,7 @@ public class TransferInside extends JFrame {
 		
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"dollar","cny","pound"}));
-		comboBox.setBounds(261, 87, 54, 23);
+		comboBox.setBounds(261, 87, 70, 23);
 		contentPane.add(comboBox);
 		
 		JLabel lblNewLabel = new JLabel("Transfer To");

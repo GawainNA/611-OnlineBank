@@ -26,6 +26,7 @@ public class Stock extends JFrame {
 	JButton btnBuy;
 	JButton btnSell;
 	JButton btnBack;
+	private JTextField textField_stockID;
 	
 
 	/**
@@ -89,15 +90,15 @@ public class Stock extends JFrame {
 		textField_Unrealized.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Availiable Stocks");
-		lblNewLabel.setBounds(31, 241, 119, 15);
+		lblNewLabel.setBounds(31, 199, 119, 15);
 		contentPane.add(lblNewLabel);
 		
 		btnBuy = new JButton("Buy");
-		btnBuy.setBounds(168, 376, 93, 23);
+		btnBuy.setBounds(106, 396, 89, 23);
 		contentPane.add(btnBuy);
 		
 		btnSell = new JButton("Sell");
-		btnSell.setBounds(168, 193, 93, 23);
+		btnSell.setBounds(221, 396, 89, 23);
 		contentPane.add(btnSell);
 		
 		btnBack = new JButton("Back");
@@ -117,11 +118,24 @@ public class Stock extends JFrame {
 		scrollPane.setViewportView(textArea_yourStocks);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(31, 266, 371, 97);
+		scrollPane_1.setBounds(31, 235, 371, 97);
 		contentPane.add(scrollPane_1);
 		
 		textArea_availiableStocks = new JTextArea();
 		scrollPane_1.setViewportView(textArea_availiableStocks);
+		
+		JButton btnUpdate = new JButton("Update Info");
+		btnUpdate.setBounds(31, 443, 105, 23);
+		contentPane.add(btnUpdate);
+		
+		JLabel lbStockID = new JLabel("Stock ID");
+		lbStockID.setBounds(31, 360, 66, 15);
+		contentPane.add(lbStockID);
+		
+		textField_stockID = new JTextField();
+		textField_stockID.setBounds(107, 357, 203, 21);
+		contentPane.add(textField_stockID);
+		textField_stockID.setColumns(10);
 	}
 
 	/*

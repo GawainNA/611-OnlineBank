@@ -6,6 +6,7 @@ import model.account.SavingAccount;
 import model.account.SecurityAccount;
 import model.user.*;
 import view.*;
+import view.Transaction;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -100,7 +101,9 @@ public class CustomerMainController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            Transaction transactionView = new Transaction();
+            TransactionController controller = new TransactionController(customer,transactionView);
+            transactionView.setVisible(true);
         }
     }
 

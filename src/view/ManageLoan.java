@@ -72,7 +72,7 @@ public class ManageLoan extends JFrame {
 		contentPane.add(btnBack);
 		
 		JLabel lblNewLabel = new JLabel("Requested Loan");
-		lblNewLabel.setBounds(10, 207, 104, 15);
+		lblNewLabel.setBounds(10, 207, 104, 24);
 		contentPane.add(lblNewLabel);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
