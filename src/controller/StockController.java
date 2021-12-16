@@ -22,7 +22,7 @@ public class StockController {
         stockView.addBackListener(new BackListener());
         stockView.addUpdateListener(new UpdateListener());
 
-        
+
     }
 
     /*
