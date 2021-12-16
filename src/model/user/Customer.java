@@ -3,10 +3,12 @@ package model.user;
 import java.util.ArrayList;
 import java.util.List;
 
+import loan.Collateral;
+import loan.CollateralFactory;
+import loan.Loan;
+import loan.LoanFactory;
 import model.Bank;
-import model.Collateral;
 import model.ErrCode;
-import model.Loan;
 import model.account.Account;
 import model.account.AccountFactory;
 import model.account.CheckingAccount;
@@ -218,14 +220,26 @@ public class Customer extends User {
         return res;
     }
 
+
+    /**
+     * 
+     * @param loanAmount amount of money loan have
+     * @param collateralPrice money that collateral worth
+     * @param collateralName collateral name
+     * @param currencyType money currency type
+     */
+    public ErrCode applyForLoan(double loanAmount, double collateralPrice, String collateralName, CurrencyType currencyType) {
+        Collateral collateral = CollateralFactory.getInstance().createCollateral(collateralName, new Currency(currencyType, collateralPrice));
+        return applyForLoan(loanAmount, currencyType, collateral);
+    }
+
     /**
      * 
      * @param currency:   currency of loan
      * @param collateral: collateral of currency
      */
-    public void applyForLoan(Currency currency, Collateral collateral) {
-        // TODO:
-
+    public ErrCode applyForLoan(Currency currency, Collateral collateral) {
+        return applyForLoan(currency.getAmount(), currency.getCurrencyType(), collateral);
     }
 
     /**
@@ -234,9 +248,25 @@ public class Customer extends User {
      * @param currencyType: type of currency
      * @param collateral:   collateral of currency
      */
-    public void applyForLoan(double amount, CurrencyType currencyType, Collateral collateral) {
-        // TODO:
+    public ErrCode applyForLoan(double amount, CurrencyType currencyType, Collateral collateral) {
+        ErrCode errCode = new ErrCode(true, "success");
+        // check whether customer has checking account
+        // only have checking account, then I can apply for loan
+        if(checkingAccount == null) {
+            errCode.isSuccess = false;
+            errCode.errMsg = "do not have checking account, please open checking account first";
+            return errCode;
+        }
+        Loan loan = LoanFactory.getInstance().createLoan(this.getUid(), amount, currencyType, collateral);
+        // just add to list, do not add money now, because manager has not validate yet
+        loanList.add(loan);
+        // also add to manager requested loan list
+        Bank.getInstance().getBankDatabase().getManager().addRequestedLoan(loan);
 
+        Bank.getInstance().getBankDatabase().update();
+
+
+        return errCode;
     }
 
     /**
