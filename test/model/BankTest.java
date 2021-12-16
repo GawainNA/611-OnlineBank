@@ -10,6 +10,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import loan.Loan;
+import loan.LoanStatus;
 import model.account.CheckingAccount;
 import model.account.SavingAccount;
 import model.currency.Currency;
@@ -17,9 +19,14 @@ import model.currency.CurrencyType;
 import model.database.BankDatabase;
 import model.database.BankDatabaseByDisk;
 import model.user.Customer;
+import model.user.Manager;
 import model.user.User;
 import model.user.UserGender;
 
+/**
+ * WARNING: please run all unit tests together every time. DO NOT run each unit
+ * seperately.
+ */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BankTest {
     private static Bank bank;
@@ -184,7 +191,7 @@ public class BankTest {
         // this customer should have saving account and checking account
         // with no money inside
         Customer customer = bankDatabase.getAllCustomer().get(0);
-        
+
         CheckingAccount checkingAccount = customer.getCheckingAccount();
         SavingAccount savingAccount = customer.getSavingAccount();
 
@@ -193,7 +200,7 @@ public class BankTest {
         // then try to close checking account, should fail
         ErrCode errCode = customer.closeCheckingAccount();
         Assert.assertFalse(errCode.isSuccess);
-        
+
         // withdraw 20 dollars from checking account, should success
         errCode = checkingAccount.withdraw(20, CurrencyType.DOLLAR);
         Assert.assertTrue(errCode.isSuccess);
@@ -203,7 +210,8 @@ public class BankTest {
 
         // deposit 20 dollars to saving account
         savingAccount.deposit(20, CurrencyType.DOLLAR);
-        // try to transfer to checking account, should fail because checking account already close
+        // try to transfer to checking account, should fail because checking account
+        // already close
         errCode = savingAccount.transferTo(checkingAccount.getId(), 20, CurrencyType.DOLLAR);
         Assert.assertFalse(errCode.isSuccess);
         // withdraw money, should success
@@ -213,6 +221,62 @@ public class BankTest {
         // reopen checking account, should success
         errCode = customer.openCheckingAccount();
         Assert.assertTrue(errCode.isSuccess);
+    }
+
+    @Test
+    public void htestLoan() {
+        // this customer should have saving account and checking account
+        // with no money inside
+        Customer customer = bankDatabase.getAllCustomer().get(0);
+        Manager manager = bankDatabase.getManager();
+        
+        double loanAmount = 20;
+        double collateralPrice = 30;
+        String collateralName = "Book";
+        CurrencyType currencyType = CurrencyType.DOLLAR;
+        // apply for loan, should success
+        ErrCode errCode = customer.applyForLoan(loanAmount, collateralPrice, collateralName, currencyType);
+        Assert.assertTrue(errCode.isSuccess);
+        // loan list of customer should not be empty
+        Assert.assertFalse(customer.getLoanList().isEmpty());
+        // loan status should be pending
+        Loan loan = customer.getLoanList().get(0);
+        Assert.assertEquals(LoanStatus.LOAN_PENDING, loan.getLoanStatus());
+        // because manger has not agree this loan, checking account should be 0 dollar or do not have this currency type
+        Currency depositCurrency = customer.getCheckingAccount().getCurrencyByType(currencyType);
+        if(depositCurrency != null) {
+            int depositAmount = (int)depositCurrency.getAmount();
+            Assert.assertEquals(0, depositAmount);
+        }
+
+
+        // manager requested list should not be empty
+        Assert.assertFalse(manager.getRequestedLoanList().isEmpty());
+        // manager handle this requsted, should success
+        errCode = manager.handleRequestedLoan(loan.getUid(), true);
+        Assert.assertTrue(errCode.isSuccess);
+        // activated loan list should not be empty, requested list should be empty
+        Assert.assertFalse(manager.getActivatedLoanList().isEmpty());
+        Assert.assertTrue(manager.getRequestedLoanList().isEmpty());
+        
+
+        // now check customer checking accout, should have loan money
+        int depositAmount = (int)customer.getCheckingAccount().getCurrencyByType(currencyType).getAmount();
+        Assert.assertEquals((int)loanAmount, depositAmount);
+
+
+        // now try to repay loan, should success
+        errCode = customer.repayLoan(loan.getUid());
+        Assert.assertTrue(errCode.isSuccess);
+        // loan status should be REPAY
+        Assert.assertEquals(LoanStatus.LOAN_REPAYED, loan.getLoanStatus());
+        // checking account should be empty
+        depositAmount = (int)customer.getCheckingAccount().getCurrencyByType(currencyType).getAmount();
+        Assert.assertEquals(0, depositAmount);
+        // customer loan list should be empty
+        Assert.assertTrue(customer.getLoanList().isEmpty());
+        // manager activated list should be empty
+        Assert.assertTrue(manager.getActivatedLoanList().isEmpty());
     }
 
     @AfterClass
