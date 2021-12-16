@@ -2,6 +2,8 @@ package controller;
 
 import model.*;
 import model.account.CheckingAccount;
+import model.account.SavingAccount;
+import model.account.SecurityAccount;
 import model.user.*;
 import view.*;
 
@@ -9,11 +11,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CustomerMainController {
-
+    Bank bank;
     Customer customer;
     CustomerMain customerMain;
 
-    CustomerMainController(Customer customer,CustomerMain customerMain){
+    CustomerMainController(Bank bank,Customer customer,CustomerMain customerMain){
+        this.bank = bank;
         this.customer = customer;
         this.customerMain = customerMain;
 
@@ -30,12 +33,14 @@ public class CustomerMainController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            /*
-            Checking checkingView = new Checking(customer.getCheckingAccount().getID());
-            CheckingAccount checkingAccount = customer.getCheckingAccount();
-            CheckingController controller = new CheckingController(checkingAccount,checkingView);
-            checkingView.showFrame();
-             */
+            if(customer.getCheckingAccount()==null){
+                customerMain.showMessage("You don't have Checking Account!");
+            }else {
+                Checking checkingView = new Checking(String.valueOf(customer.getCheckingAccount().getId()));
+                CheckingAccount checkingAccount = customer.getCheckingAccount();
+                CheckingController controller = new CheckingController(bank,checkingAccount,checkingView);
+                checkingView.showFrame();
+            }
         }
     }
 
@@ -43,6 +48,14 @@ public class CustomerMainController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            if(customer.getSavingAccount()==null){
+                customerMain.showMessage("You don't have Savings Account!");
+            }else {
+                SavingAccount savingAccount = customer.getSavingAccount();
+                Savings savingsView = new Savings(String.valueOf(customer.getSavingAccount().getId()));
+                SavingsController controller = new SavingsController(bank,savingAccount,savingsView);
+                savingsView.showFrame();
+            }
 
         }
     }
@@ -51,6 +64,14 @@ public class CustomerMainController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            if(customer.getSecurityAccount()==null){
+                customerMain.showMessage("You don't have Security Account!");
+            }else {
+                SecurityAccount securityAccount = customer.getSecurityAccount();
+                Security securityView = new Security(String.valueOf(customer.getSecurityAccount().getId()));
+                SecurityController controller = new SecurityController(bank,securityAccount,securityView);
+                securityView.showFrame();
+            }
 
         }
     }
@@ -59,7 +80,9 @@ public class CustomerMainController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            OpenAccount openAccountView = new OpenAccount();
+            OpenAccountController controller = new OpenAccountController(customer,openAccountView);
+            openAccountView.setVisible(true);
         }
     }
 
@@ -67,7 +90,9 @@ public class CustomerMainController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            Loan loanView = new Loan();
+            LoanController controller = new LoanController(bank,customer,loanView);
+            loanView.setVisible(true);
         }
     }
 
@@ -83,7 +108,12 @@ public class CustomerMainController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            Sign sign = new Sign();
+            Bank bank = Bank.getInstance();
 
+            SignInController sample = new SignInController(bank,sign);
+            sign.showFrame();
+            customerMain.close();
         }
     }
 

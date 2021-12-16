@@ -1,16 +1,23 @@
 package controller;
 
+import model.Bank;
+import model.ErrCode;
 import model.account.CheckingAccount;
+import model.currency.CurrencyType;
 import view.Checking;
+import view.Transfer;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Set;
 
 public class CheckingController {
+    Bank bank;
     Checking checkingView;
     CheckingAccount checkingAccount;
 
-    CheckingController(CheckingAccount checkingAccount,Checking checkingView){
+    CheckingController(Bank bank,CheckingAccount checkingAccount,Checking checkingView){
+        this.bank = bank;
         this.checkingAccount = checkingAccount;
         this.checkingView = checkingView;
 
@@ -19,8 +26,19 @@ public class CheckingController {
         checkingView.addDepositListener(new DepositListener());
         checkingView.addWithdrawListener(new WithdrawListener());
         checkingView.addBackListener(new BackListener());
+
+        refreshInfo();
     }
 
+    private void refreshInfo(){
+        String BalanceInfo = "";
+        Set<CurrencyType> types = checkingAccount.getAllCurrencyType();
+        for(CurrencyType type : types){
+            Double amount = checkingAccount.getCurrencyByType(type).getAmount();
+            BalanceInfo = BalanceInfo.concat(amount+"  "+type.getName()+"\n");
+        }
+        checkingView.setBalance(BalanceInfo);
+    }
     /*
 	JButton btnTransfer;
 	JButton btnCloseAccount;
@@ -33,7 +51,9 @@ public class CheckingController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            Transfer transferView = new Transfer();
+            TransferController controller = new TransferController(bank,checkingAccount,transferView);
+            transferView.showFrame();
         }
     }
 
@@ -49,7 +69,9 @@ public class CheckingController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            checkingAccount.deposit(Integer.parseInt(checkingView.getAmount()), CurrencyType.str2CurrencyType(checkingView.getCurrency()));
+            checkingView.showMessage("Success!");
+            refreshInfo();
         }
     }
 
@@ -57,7 +79,9 @@ public class CheckingController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            ErrCode errCode = checkingAccount.withdraw(Integer.parseInt(checkingView.getAmount()), CurrencyType.str2CurrencyType(checkingView.getCurrency()));
+            checkingView.showMessage(errCode.errMsg);
+            refreshInfo();
         }
     }
 
@@ -65,7 +89,7 @@ public class CheckingController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            checkingView.close();
         }
     }
 }

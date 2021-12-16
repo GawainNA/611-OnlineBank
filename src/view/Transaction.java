@@ -10,6 +10,7 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
 
 public class Transaction extends JFrame {
 
@@ -46,11 +47,6 @@ public class Transaction extends JFrame {
 		lblNewLabel.setBounds(10, 34, 118, 15);
 		contentPane.add(lblNewLabel);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setEditable(false);
-		textArea.setBounds(10, 62, 414, 171);
-		contentPane.add(textArea);
-		
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -59,5 +55,12 @@ public class Transaction extends JFrame {
 		});
 		btnBack.setBounds(331, 257, 93, 23);
 		contentPane.add(btnBack);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 70, 414, 159);
+		contentPane.add(scrollPane);
+		
+		JTextArea textArea_Log = new JTextArea();
+		scrollPane.setViewportView(textArea_Log);
 	}
 }

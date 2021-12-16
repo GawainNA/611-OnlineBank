@@ -1,14 +1,8 @@
 package view;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
 import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -17,7 +11,6 @@ public class Transfer {
 	private JFrame frame;
 	private JTextField textField_AccountID;
 	private JTextField textField_Amount;
-	private String currentAccountID;
 	JComboBox comboBox;
 	JButton btnConfirm;
 	JButton btnCancel;
@@ -29,7 +22,7 @@ public class Transfer {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Transfer window = new Transfer("1235");
+					Transfer window = new Transfer();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,9 +34,8 @@ public class Transfer {
 	/**
 	 * Create the application.
 	 */
-	public Transfer(String accountID) {
+	public Transfer() {
 		initialize();
-		currentAccountID = accountID;
 	}
 	
 	public void showFrame() {
@@ -51,7 +43,7 @@ public class Transfer {
 	}
 	
 	public void close() {
-		frame.setVisible(false);
+		frame.dispose();
 	}
 
 	/**
@@ -88,7 +80,7 @@ public class Transfer {
 		textField_Amount.setColumns(10);
 		
 		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"USD", "JPY", "EUR", "RMB", "GBP"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"dollar","cny","pound"}));
 		comboBox.setBounds(287, 133, 54, 23);
 		frame.getContentPane().add(comboBox);
 		
@@ -110,8 +102,8 @@ public class Transfer {
 		frame.getContentPane().add(btnCancel);
 	}
 
-	public String getCurrentAccountID(){
-		return currentAccountID;
+	public String getToId(){
+		return textField_AccountID.getText();
 	}
 
 	public String getAmount(){
@@ -128,5 +120,9 @@ public class Transfer {
 
 	public void addCancelListener(ActionListener actionListener){
 		btnCancel.addActionListener(actionListener);
+	}
+
+	public void showMessage(String message){
+		JOptionPane.showMessageDialog(frame, message);
 	}
 }

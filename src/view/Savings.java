@@ -4,13 +4,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
 public class Savings {
 
@@ -53,7 +47,7 @@ public class Savings {
 	}
 	
 	public void close() {
-		frame.setVisible(false);
+		frame.dispose();
 	}
 
 	/**
@@ -127,6 +121,7 @@ public class Savings {
 		frame.getContentPane().add(lblNewLabel_2);
 		
 		comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"dollar","cny","pound"}));
 		comboBox.setBounds(205, 370, 51, 23);
 		frame.getContentPane().add(comboBox);
 		
@@ -150,6 +145,9 @@ public class Savings {
 	JButton btnBack;
 	JComboBox comboBox;
 	 */
+	public void setBalance(String Info){
+		txtABalance.setText(Info);
+	}
 
 	public String getAccountID(){
 		return lblid_Display.getText();
@@ -181,5 +179,9 @@ public class Savings {
 
 	public void addBackListener(ActionListener actionListener){
 		btnBack.addActionListener(actionListener);
+	}
+
+	public void showMessage(String message){
+		JOptionPane.showMessageDialog(frame, message);
 	}
 }

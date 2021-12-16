@@ -22,6 +22,8 @@ public class Repayment extends JFrame {
 	private JTextField textField_Amount;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JTextField txtRmb;
+	private JButton btnConfirm;
+	private JButton btnCancel;
 
 	/**
 	 * Launch the application.
@@ -65,18 +67,18 @@ public class Repayment extends JFrame {
 		contentPane.add(textField_Amount);
 		textField_Amount.setColumns(10);
 		
-		JButton btnConfirm = new JButton("Confirm");
+		btnConfirm = new JButton("Confirm");
 		btnConfirm.setBounds(110, 190, 93, 23);
 		contentPane.add(btnConfirm);
 		
-		JButton btnNewButton = new JButton("Cancel");
-		btnNewButton.addActionListener(new ActionListener() {
+		btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
-		btnNewButton.setBounds(222, 190, 93, 23);
-		contentPane.add(btnNewButton);
+		btnCancel.setBounds(222, 190, 93, 23);
+		contentPane.add(btnCancel);
 		
 		JLabel lblNewLabel = new JLabel("Loan Info");
 		lblNewLabel.setBounds(46, 59, 54, 15);
@@ -91,6 +93,29 @@ public class Repayment extends JFrame {
 		txtRmb.setBounds(110, 56, 206, 21);
 		contentPane.add(txtRmb);
 		txtRmb.setColumns(10);
+	}
+	/*
+	private JTextField textField_Amount;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JTextField txtRmb;
+	private JButton btnConfirm;
+	private JButton btnCancel;
+	 */
+
+	public String getAmount(){
+		return textField_Amount.getText();
+	}
+
+	public String getLoanInfo(){
+		return txtRmb.getText();
+	}
+
+	public void addConfirmListener(ActionListener actionListener){
+		btnConfirm.addActionListener(actionListener);
+	}
+
+	public void addCancelListener(ActionListener actionListener){
+		btnCancel.addActionListener(actionListener);
 	}
 
 }

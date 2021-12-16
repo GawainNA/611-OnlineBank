@@ -10,10 +10,18 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
 
 public class ManageStock extends JFrame {
 
 	private JPanel contentPane;
+	private JButton btnUpdateInfo;
+	private JButton btnActiveStock;
+	private JButton btnRemove;
+	private JButton btnBack;
+	private JTextArea textArea_activedStocks;
+	private JTextArea textArea_StockMarket;
+
 
 	/**
 	 * Launch the application.
@@ -46,37 +54,77 @@ public class ManageStock extends JFrame {
 		lblNewLabel.setBounds(10, 21, 93, 15);
 		contentPane.add(lblNewLabel);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(10, 39, 414, 105);
-		contentPane.add(textArea);
-		
 		JLabel lblNewLabel_1 = new JLabel("Stock Market");
 		lblNewLabel_1.setBounds(10, 187, 93, 15);
 		contentPane.add(lblNewLabel_1);
 		
-		JTextArea textArea_1 = new JTextArea();
-		textArea_1.setBounds(10, 212, 414, 113);
-		contentPane.add(textArea_1);
-		
-		JButton btnNewButton = new JButton("Update Info");
-		btnNewButton.setBounds(10, 367, 109, 23);
-		contentPane.add(btnNewButton);
-		
-		JButton btnActiveStock = new JButton("Active Stock");
+		btnUpdateInfo = new JButton("Update Info");
+		btnUpdateInfo.setBounds(10, 367, 109, 23);
+		contentPane.add(btnUpdateInfo);
+
+
+		btnActiveStock = new JButton("Active Stock");
 		btnActiveStock.setBounds(159, 367, 109, 23);
 		contentPane.add(btnActiveStock);
 		
-		JButton btnNewButton_1 = new JButton("Remove");
-		btnNewButton_1.setBounds(159, 153, 93, 23);
-		contentPane.add(btnNewButton_1);
+		btnRemove = new JButton("Remove");
+		btnRemove.setBounds(159, 153, 93, 23);
+		contentPane.add(btnRemove);
 		
-		JButton btnNewButton_2 = new JButton("Back");
-		btnNewButton_2.addActionListener(new ActionListener() {
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
-		btnNewButton_2.setBounds(331, 367, 93, 23);
-		contentPane.add(btnNewButton_2);
+		btnBack.setBounds(331, 367, 93, 23);
+		contentPane.add(btnBack);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 46, 414, 105);
+		contentPane.add(scrollPane);
+		
+		textArea_activedStocks = new JTextArea();
+		scrollPane.setViewportView(textArea_activedStocks);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(10, 215, 414, 127);
+		contentPane.add(scrollPane_1);
+		
+		textArea_StockMarket = new JTextArea();
+		scrollPane_1.setViewportView(textArea_StockMarket);
+	}
+
+	/*
+	private JButton btnUpdateInfo;
+	private JButton btnActiveStock;
+	private JButton btnRemove;
+	private JButton btnBack;
+	private JTextArea textArea_activedStocks;
+	private JTextArea textArea_StockMarket;
+	 */
+
+	public void addUpdateInfoListener(ActionListener actionListener){
+		btnUpdateInfo.addActionListener(actionListener);
+	}
+
+	public void addActiveStockListener(ActionListener actionListener){
+		btnActiveStock.addActionListener(actionListener);
+	}
+
+	public void addRemoveListener(ActionListener actionListener){
+		btnRemove.addActionListener(actionListener);
+	}
+
+	public void addBackListener(ActionListener actionListener){
+		btnBack.addActionListener(actionListener);
+	}
+
+	public void setActiveStocks(String Info){
+		textArea_activedStocks.setText(Info);
+	}
+
+	public void setStockMarket(String Info){
+		textArea_StockMarket.setText(Info);
 	}
 }

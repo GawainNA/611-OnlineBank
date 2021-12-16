@@ -1,16 +1,10 @@
 package view;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
 import java.awt.Font;
-import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
 
 public class Checking {
 
@@ -53,7 +47,7 @@ public class Checking {
 	}
 	
 	public void close() {
-		frame.setVisible(false);
+		frame.dispose();
 	}
 
 	/**
@@ -104,11 +98,6 @@ public class Checking {
 		frame.getContentPane().add(btnDeposit);
 		
 		btnBack = new JButton("Back");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
-			}
-		});
 		btnBack.setBounds(365, 414, 86, 30);
 		frame.getContentPane().add(btnBack);
 		
@@ -130,8 +119,13 @@ public class Checking {
 		frame.getContentPane().add(lblNewLabel_2);
 
 		comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"dollar","cny","pound"}));
 		comboBox.setBounds(205, 370, 51, 23);
 		frame.getContentPane().add(comboBox);
+	}
+
+	public void setBalance(String Info){
+		txtABalance.setText(Info);
 	}
 
 	public String getAmount(){
@@ -167,5 +161,9 @@ public class Checking {
 
 	public void addBackListener(ActionListener actionListener){
 		btnBack.addActionListener(actionListener);
+	}
+
+	public void showMessage(String message){
+		JOptionPane.showMessageDialog(frame, message);
 	}
 }

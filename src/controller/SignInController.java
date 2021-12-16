@@ -29,10 +29,16 @@ public class SignInController {
             }else if (user instanceof Customer customer){
                 //Open CustomerMain
                 CustomerMain customerMain = new CustomerMain(customer.getUsername(),String.valueOf(customer.getUid()));
-                CustomerMainController customerMainController = new CustomerMainController(customer,customerMain);
+                CustomerMainController customerMainController = new CustomerMainController(bank,customer,customerMain);
                 customerMain.showFrame();
+                sign.close();
             }else {
                 //open ManagerMain
+                Manager manager = (Manager) user;
+                ManagerMain managerMain = new ManagerMain(String.valueOf(user.getUid()));
+                ManagerMainController controller = new ManagerMainController(bank,manager,managerMain);
+                managerMain.setVisible(true);
+                sign.close();
             }
         }
     }

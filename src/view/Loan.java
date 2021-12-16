@@ -15,10 +15,17 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 public class Loan extends JFrame {
 
 	private JPanel contentPane;
+	JButton btnNewLoan;
+	JButton btnRepayment;
+	JButton btnBack;
+	JTextArea textArea_CurrentLoan;
+	private JTextField textField_RepaymentID;
 
 	/**
 	 * Launch the application.
@@ -41,7 +48,7 @@ public class Loan extends JFrame {
 	 */
 	public Loan() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 343);
+		setBounds(100, 100, 450, 385);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -57,43 +64,66 @@ public class Loan extends JFrame {
 		lblNewLabel.setBounds(35, 51, 77, 15);
 		contentPane.add(lblNewLabel);
 		
-		JButton btnNewLoan = new JButton("New Loan");
-		btnNewLoan.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				RequestLoan Request = new RequestLoan();
-				Request.setVisible(true);
-			}
-		});
-		btnNewLoan.setBounds(35, 229, 93, 31);
+		btnNewLoan = new JButton("New Loan");
+		btnNewLoan.setBounds(35, 300, 93, 31);
 		contentPane.add(btnNewLoan);
 		
-		JTextPane txtpnTest = new JTextPane();
-		txtpnTest.setText("test");
-		txtpnTest.setEditable(false);
-		txtpnTest.setBounds(35, 76, 364, 119);
-		contentPane.add(txtpnTest);
-		
-		JButton btnRepayment = new JButton("Repayment");
-		btnRepayment.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			
-				Repayment tmp = new Repayment(txtpnTest.getSelectedText());
-				tmp.setVisible(true);
-			}
-		});
-		btnRepayment.setBounds(165, 229, 103, 31);
+		btnRepayment = new JButton("Repayment");
+
+		btnRepayment.setBounds(296, 246, 103, 24);
 		contentPane.add(btnRepayment);
 		
-		JButton btnBack = new JButton("Back");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
-		btnBack.setBounds(306, 229, 93, 31);
+		btnBack = new JButton("Back");
+		btnBack.setBounds(306, 300, 93, 31);
 		contentPane.add(btnBack);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(35, 76, 364, 143);
+		contentPane.add(scrollPane);
 		
+		textArea_CurrentLoan = new JTextArea();
+		textArea_CurrentLoan.setEditable(false);
+		scrollPane.setViewportView(textArea_CurrentLoan);
+		
+		textField_RepaymentID = new JTextField();
+		textField_RepaymentID.setBounds(103, 248, 183, 21);
+		contentPane.add(textField_RepaymentID);
+		textField_RepaymentID.setColumns(10);
+		
+		JLabel lblRepaymentID = new JLabel("Loan ID");
+		lblRepaymentID.setBounds(35, 251, 58, 15);
+		contentPane.add(lblRepaymentID);
 	}
 
+	public void setCurrentLoan(String loanInfo){
+		textArea_CurrentLoan.setText(loanInfo);
+	}
+
+	public String getLoanID(){
+		return textField_RepaymentID.getText();
+	}
+
+	public String getCurrentLoan(){
+		return textArea_CurrentLoan.getText();
+	}
+	/*
+	JButton btnNewLoan;
+	JButton btnRepayment;
+	JButton btnBack;
+	 */
+	public void addNewLoanListener(ActionListener actionListener){
+		btnNewLoan.addActionListener(actionListener);
+	}
+
+	public void addRepaymentListener(ActionListener actionListener){
+		btnRepayment.addActionListener(actionListener);
+	}
+
+	public void addBackListener(ActionListener actionListener){
+		btnBack.addActionListener(actionListener);
+	}
+
+	public void showMessage(String message){
+		JOptionPane.showMessageDialog(this, message);
+	}
 }

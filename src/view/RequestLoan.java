@@ -2,16 +2,9 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -20,7 +13,10 @@ public class RequestLoan extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField_amount;
 	private JTextField textField_collateral;
-	private JTextField textField_TimeLimt;
+	private JTextField textField_Price;
+	JComboBox comboBox;
+	JButton btnConfirm;
+	JButton btnCancel;
 
 	/**
 	 * Launch the application.
@@ -68,7 +64,8 @@ public class RequestLoan extends JFrame {
 		lblCurrency.setBounds(201, 74, 54, 15);
 		contentPane.add(lblCurrency);
 		
-		JComboBox comboBox = new JComboBox();
+		comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"dollar","cny","pound"}));
 		comboBox.setBounds(277, 70, 54, 23);
 		contentPane.add(comboBox);
 		
@@ -81,32 +78,58 @@ public class RequestLoan extends JFrame {
 		contentPane.add(textField_collateral);
 		textField_collateral.setColumns(10);
 		
-		JLabel lblTimeLimit = new JLabel("Time Limt");
-		lblTimeLimit.setBounds(201, 119, 66, 15);
-		contentPane.add(lblTimeLimit);
+		JLabel lblPrice = new JLabel("Price");
+		lblPrice.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPrice.setBounds(201, 119, 66, 15);
+		contentPane.add(lblPrice);
 		
-		JComboBox comboBox_TimeUnit = new JComboBox();
-		comboBox_TimeUnit.setModel(new DefaultComboBoxModel(new String[] {"Month(s)", "Year(s)"}));
-		comboBox_TimeUnit.setBounds(348, 115, 76, 23);
-		contentPane.add(comboBox_TimeUnit);
+		textField_Price = new JTextField();
+		textField_Price.setBounds(263, 116, 66, 21);
+		contentPane.add(textField_Price);
+		textField_Price.setColumns(10);
 		
-		textField_TimeLimt = new JTextField();
-		textField_TimeLimt.setBounds(263, 116, 66, 21);
-		contentPane.add(textField_TimeLimt);
-		textField_TimeLimt.setColumns(10);
-		
-		JButton btnConfirm = new JButton("Confirm");
+		btnConfirm = new JButton("Confirm");
 		btnConfirm.setBounds(93, 174, 93, 23);
 		contentPane.add(btnConfirm);
 		
-		JButton btnCancel = new JButton("Cancel");
-		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
+		btnCancel = new JButton("Cancel");
 		btnCancel.setBounds(249, 174, 93, 23);
 		contentPane.add(btnCancel);
 	}
+/*
+private JTextField textField_amount;
+	private JTextField textField_collateral;
+	private JTextField textField_TimeLimit;
+	JComboBox comboBox;
+	JComboBox comboBox_TimeUnit;
+	JButton btnConfirm;
+	JButton btnCancel;
+ */
+	public String getAmount(){
+		return textField_amount.getText();
+	}
 
+	public String getCollateral(){
+		return textField_collateral.getText();
+	}
+
+	public String getPrice(){
+		return textField_Price.getText();
+	}
+
+	public String getCurrency(){
+		return String.valueOf(comboBox.getSelectedItem());
+	}
+
+	public void showMessage(String message){
+		JOptionPane.showMessageDialog(this, message);
+	}
+
+	public void addConfirmListener(ActionListener actionListener){
+		btnConfirm.addActionListener(actionListener);
+	}
+
+	public void addCancelListener(ActionListener actionListener){
+		btnCancel.addActionListener(actionListener);
+	}
 }

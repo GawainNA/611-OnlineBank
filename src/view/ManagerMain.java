@@ -52,43 +52,18 @@ public class ManagerMain extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		btnLog = new JButton("Transactions Log");
-		btnLog.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Transaction log = new Transaction();
-				log.setVisible(true);
-			}
-		});
 		btnLog.setBounds(0, 74, 143, 33);
 		contentPane.add(btnLog);
 		
 		btnLoan = new JButton("Manage Loans");
-		btnLoan.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ManageLoan tmp = new ManageLoan();
-				tmp.setVisible(true);
-			}
-		});
 		btnLoan.setBounds(0, 158, 143, 33);
 		contentPane.add(btnLoan);
 		
 		btnManageStocks = new JButton("Manage Stocks");
-		btnManageStocks.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ManageStock tmp = new ManageStock();
-				tmp.setVisible(true);
-			}
-		});
 		btnManageStocks.setBounds(291, 74, 143, 33);
 		contentPane.add(btnManageStocks);
 		
 		btnSignOut = new JButton("Sign Out");
-		btnSignOut.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Sign sign = new Sign();
-				sign.showFrame();
-				dispose();
-			}
-		});
 		btnSignOut.setBounds(291, 158, 143, 33);
 		contentPane.add(btnSignOut);
 	}

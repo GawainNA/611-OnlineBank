@@ -51,7 +51,7 @@ public class CustomerMain {
 	}
 	
 	public void close() {
-		frame.setVisible(false);
+		frame.dispose();
 	}
 
 	/**
@@ -74,12 +74,6 @@ public class CustomerMain {
 		frame.getContentPane().add(btnChecking);
 		
 		btnLoan = new JButton("Loan");
-		btnLoan.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Loan tmp = new Loan();
-				tmp.setVisible(true);
-			}
-		});
 		btnLoan.setBounds(289, 102, 145, 33);
 		frame.getContentPane().add(btnLoan);
 		
@@ -92,13 +86,6 @@ public class CustomerMain {
 		frame.getContentPane().add(btnSecurityAccount);
 		
 		btnSignOut = new JButton("Sign Out");
-		btnSignOut.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Sign s = new Sign();
-				s.showFrame();
-				close();
-			}
-		});
 		btnSignOut.setBounds(168, 314, 93, 23);
 		frame.getContentPane().add(btnSignOut);
 		
@@ -161,4 +148,7 @@ public class CustomerMain {
 		return lblUIDDisplay.getText();
 	}
 
+	public void showMessage(String message){
+		JOptionPane.showMessageDialog(frame,message);
+	}
 }
