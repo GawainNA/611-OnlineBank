@@ -2,7 +2,7 @@ package model.database;
 
 import java.util.List;
 
-import model.Loan;
+import loan.Loan;
 import model.account.Account;
 import model.user.Customer;
 import model.user.Manager;

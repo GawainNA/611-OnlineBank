@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import model.Loan;
+import loan.Loan;
 import model.Persistable;
 import model.account.Account;
 import model.user.Customer;
