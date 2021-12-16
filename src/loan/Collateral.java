@@ -1,5 +1,6 @@
-package model;
+package loan;
 
+import model.Persistable;
 import model.currency.Currency;
 import util.IdCreator;
 
