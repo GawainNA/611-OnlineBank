@@ -36,4 +36,10 @@ public class AccountFactory{
         Bank.getInstance().getBankDatabase().addAccount(securityAccount);
         return securityAccount;
     }
+
+    public ManagerAccount createManagerAccount() {
+        ManagerAccount managerAccount = new ManagerAccount();
+        Bank.getInstance().getBankDatabase().addAccount(managerAccount);
+        return managerAccount;
+    }
 }
