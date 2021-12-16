@@ -3,25 +3,32 @@ package model.user;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Loan;
+import loan.Loan;
+import loan.LoanStatus;
+import model.Bank;
+import model.ErrCode;
+import model.account.AccountFactory;
+import model.account.ManagerAccount;
 
-/** 
+/**
  * Singleton (only one manager)
  */
-public class Manager extends User{
+public class Manager extends User {
     private static Manager manager;
 
-    private List<Loan> activatedLoan;
-    private List<Loan> requestedLoan;
+    private List<Loan> activatedLoanList;
+    private List<Loan> requestedLoanList;
+    private ManagerAccount managerAccount;
 
     private Manager(String username, UserGender gender, String passwd, String address, String phoneNum) {
         super(username, gender, passwd, address, phoneNum);
-        activatedLoan = new ArrayList<>();
-        requestedLoan = new ArrayList<>();
+        activatedLoanList = new ArrayList<>();
+        requestedLoanList = new ArrayList<>();
+        managerAccount = AccountFactory.getInstance().createManagerAccount();
     }
 
     public static Manager getInstance() {
-        if(manager == null) {
+        if (manager == null) {
             String managerName = "admin";
             UserGender managerGender = UserGender.FEMALE;
             String passwd = "admin";
@@ -32,32 +39,69 @@ public class Manager extends User{
         return manager;
     }
 
-    public void handleRequestedLoan(int loanId, boolean accept) {
+    public ErrCode handleRequestedLoan(int loanId, boolean accept) {
         // TODO:
+        ErrCode errCode = new ErrCode(true, "success");
+        Loan loan = Bank.getInstance().getBankDatabase().getLoanById(loanId);
+        // check whether this loan is in requestedLoan
+        if (!requestedLoanList.contains(loan)) {
+            errCode.isSuccess = false;
+            errCode.errMsg = "this loan id does not exist in requested list, please check again";
+            return errCode;
+        }
+
+        // if not accept, change loan status
+        if (!accept) {
+            loan.setLoanStatus(LoanStatus.LOAN_REFUSED);
+        } else {
+            // if accept, change loan status, add to activated loan list
+            loan.setLoanStatus(LoanStatus.LOAN_AGREED);
+            addActivatedLoan(loan);
+
+            // add money to checking account of the customer who apply the loan
+            Customer customer = Bank.getInstance().getBankDatabase().getCustomerById(loan.getCustomerId());
+            errCode = managerAccount.transferTo(customer.getCheckingAccount().getId(), loan.getLoanCurrency());
+        }
+
+        // remove from requested loan list
+        removeRequestedLoan(loan);
+        return errCode;
     }
 
-    public List<Loan> getActivatedLoan() {
-        return activatedLoan;
+    public List<Loan> getActivatedLoanList() {
+        return activatedLoanList;
     }
 
-    public void setActivatedLoan(List<Loan> activatedLoan) {
-        this.activatedLoan = activatedLoan;
-    }
-
-    public List<Loan> getRequestedLoan() {
-        return requestedLoan;
-    }
-
-    public void setRequestedLoan(List<Loan> requestedLoan) {
-        this.requestedLoan = requestedLoan;
+    public List<Loan> getRequestedLoanList() {
+        return requestedLoanList;
     }
 
     public void addRequestedLoan(Loan loan) {
-        requestedLoan.add(loan);
+        requestedLoanList.add(loan);
+        Bank.getInstance().getBankDatabase().update();
     }
 
-    public void addActivatedLoan(Loan loan) {
-        activatedLoan.add(loan);
+    private void addActivatedLoan(Loan loan) {
+        activatedLoanList.add(loan);
+        Bank.getInstance().getBankDatabase().update();
+    }
+
+    public void removeActivatedLoan(Loan loan) {
+        activatedLoanList.remove(loan);
+        Bank.getInstance().getBankDatabase().update();
+    }
+
+    public void removeRequestedLoan(Loan loan) {
+        requestedLoanList.remove(loan);
+        Bank.getInstance().getBankDatabase().update();
+    }
+
+    public ManagerAccount getManagerAccount() {
+        return managerAccount;
+    }
+
+    public void setManagerAccount(ManagerAccount managerAccount) {
+        this.managerAccount = managerAccount;
     }
 
 }
