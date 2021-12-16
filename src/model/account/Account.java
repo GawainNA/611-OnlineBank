@@ -17,6 +17,7 @@ import util.IdCreator;
 public abstract class Account implements Persistable{
     private int id;
     private Map<CurrencyType, Currency> currencyMap;
+    private int userId;
     private boolean isClosed;
 
     public Account() {
@@ -119,6 +120,14 @@ public abstract class Account implements Persistable{
 
     public void setClosed(boolean isClosed) {
         this.isClosed = isClosed;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
 }

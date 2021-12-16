@@ -45,6 +45,8 @@ public class Customer extends User {
             return errCode;
         }
         checkingAccount = AccountFactory.getInstance().createCheckingAccount();
+        checkingAccount.setUserId(this.getUid());
+
         Bank.getInstance().getBankDatabase().update();
         return errCode;
     }
@@ -61,6 +63,8 @@ public class Customer extends User {
             return errCode;
         }
         savingAccount = AccountFactory.getInstance().createSavingAccount();
+        savingAccount.setUserId(this.getUid());
+
         Bank.getInstance().getBankDatabase().update();
         return errCode;
     }
@@ -96,6 +100,13 @@ public class Customer extends User {
 
         // sucessfully open security account
         securityAccount = AccountFactory.getInstance().createSecurityAccount();
+        securityAccount.setUserId(this.getUid());
+
+        // should immediately transfer 1000 dollars to this new security account
+        double activateMoney = 1000;
+        errCode = savingAccount.transferTo(securityAccount.getId(), activateMoney, CurrencyType.DOLLAR);
+    
+
         Bank.getInstance().getBankDatabase().update();
         return errCode;
     }
