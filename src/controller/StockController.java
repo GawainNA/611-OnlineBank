@@ -20,6 +20,9 @@ public class StockController {
         stockView.addBuyListener(new BuyListener());
         stockView.addSellListener(new SellListener());
         stockView.addBackListener(new BackListener());
+        stockView.addUpdateListener(new UpdateListener());
+
+        
     }
 
     /*
@@ -27,6 +30,14 @@ public class StockController {
 	JButton btnSell;
 	JButton btnNewBack;
      */
+
+    class UpdateListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
+    }
 
     class BuyListener implements ActionListener{
 
@@ -48,7 +59,7 @@ public class StockController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            stockView.dispose();
         }
     }
 }

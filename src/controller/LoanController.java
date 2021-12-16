@@ -59,9 +59,13 @@ public class LoanController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            ErrCode errCode = customer.repayLoan(Integer.parseInt(loanView.getLoanID()));
-            loanView.showMessage(errCode.errMsg);
-            refreshInfo();
+            try {
+                ErrCode errCode = customer.repayLoan(Integer.parseInt(loanView.getLoanID()));
+                loanView.showMessage(errCode.errMsg);
+                refreshInfo();
+            }catch (NumberFormatException exception){
+                loanView.showMessage("Please input correct ID!");
+            }
         }
     }
 

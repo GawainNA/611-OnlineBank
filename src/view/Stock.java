@@ -26,6 +26,7 @@ public class Stock extends JFrame {
 	JButton btnBuy;
 	JButton btnSell;
 	JButton btnBack;
+	JButton btnUpdate;
 	private JTextField textField_stockID;
 	
 
@@ -115,6 +116,7 @@ public class Stock extends JFrame {
 		contentPane.add(scrollPane);
 		
 		textArea_yourStocks = new JTextArea();
+		textArea_yourStocks.setEditable(false);
 		scrollPane.setViewportView(textArea_yourStocks);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -122,9 +124,10 @@ public class Stock extends JFrame {
 		contentPane.add(scrollPane_1);
 		
 		textArea_availiableStocks = new JTextArea();
+		textArea_availiableStocks.setEditable(false);
 		scrollPane_1.setViewportView(textArea_availiableStocks);
 		
-		JButton btnUpdate = new JButton("Update Info");
+		btnUpdate = new JButton("Update Info");
 		btnUpdate.setBounds(31, 443, 105, 23);
 		contentPane.add(btnUpdate);
 		
@@ -169,6 +172,10 @@ public class Stock extends JFrame {
 		return currentAccountID;
 	}
 
+	public String getStockID(){
+		return textField_stockID.getText();
+	}
+
 	public void addBuyListener(ActionListener actionListener){
 		btnBuy.addActionListener(actionListener);
 	}
@@ -179,5 +186,9 @@ public class Stock extends JFrame {
 
 	public void addBackListener(ActionListener actionListener){
 		btnBack.addActionListener(actionListener);
+	}
+
+	public void addUpdateListener(ActionListener actionListener){
+		btnUpdate.addActionListener(actionListener);
 	}
 }

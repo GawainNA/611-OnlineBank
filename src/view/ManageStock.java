@@ -85,6 +85,7 @@ public class ManageStock extends JFrame {
 		contentPane.add(scrollPane);
 		
 		textArea_activedStocks = new JTextArea();
+		textArea_activedStocks.setEditable(false);
 		scrollPane.setViewportView(textArea_activedStocks);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -92,6 +93,7 @@ public class ManageStock extends JFrame {
 		contentPane.add(scrollPane_1);
 		
 		textArea_StockMarket = new JTextArea();
+		textArea_StockMarket.setEditable(false);
 		scrollPane_1.setViewportView(textArea_StockMarket);
 	}
 
