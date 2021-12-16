@@ -26,7 +26,6 @@ public class Stock extends JFrame {
 	JButton btnBuy;
 	JButton btnSell;
 	JButton btnBack;
-	JButton btnUpdate;
 	private JTextField textField_stockID;
 	
 
@@ -108,7 +107,7 @@ public class Stock extends JFrame {
 				dispose();
 			}
 		});
-		btnBack.setBounds(309, 443, 93, 23);
+		btnBack.setBounds(309, 452, 93, 23);
 		contentPane.add(btnBack);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -126,10 +125,6 @@ public class Stock extends JFrame {
 		textArea_availiableStocks = new JTextArea();
 		textArea_availiableStocks.setEditable(false);
 		scrollPane_1.setViewportView(textArea_availiableStocks);
-		
-		btnUpdate = new JButton("Update Info");
-		btnUpdate.setBounds(31, 443, 105, 23);
-		contentPane.add(btnUpdate);
 		
 		JLabel lbStockID = new JLabel("Stock ID");
 		lbStockID.setBounds(31, 360, 66, 15);
@@ -188,7 +183,4 @@ public class Stock extends JFrame {
 		btnBack.addActionListener(actionListener);
 	}
 
-	public void addUpdateListener(ActionListener actionListener){
-		btnUpdate.addActionListener(actionListener);
-	}
 }

@@ -15,9 +15,8 @@ public class ManageStockController {
         this.manageStockView = manageStockView;
 
         manageStockView.addBackListener(new BackListener());
-        manageStockView.addActiveStockListener(new ActiveStockListener());
         manageStockView.addUpdateInfoListener(new UpdateInfoListener());
-        manageStockView.addRemoveListener(new RemoveListener());
+
     }
     /*
 	private JButton btnUpdateInfo;
@@ -34,21 +33,6 @@ public class ManageStockController {
         }
     }
 
-    class ActiveStockListener implements ActionListener{
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-        }
-    }
-
-    class RemoveListener implements ActionListener{
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-
-        }
-    }
 
     class BackListener implements ActionListener{
 

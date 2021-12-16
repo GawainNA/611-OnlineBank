@@ -11,15 +11,14 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class ManageStock extends JFrame {
 
 	private JPanel contentPane;
 	private JButton btnUpdateInfo;
-	private JButton btnActiveStock;
-	private JButton btnRemove;
 	private JButton btnBack;
-	private JTextArea textArea_activedStocks;
 	private JTextArea textArea_StockMarket;
 
 
@@ -44,32 +43,21 @@ public class ManageStock extends JFrame {
 	 */
 	public ManageStock() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 472);
+		setBounds(100, 100, 450, 378);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Actived Stocks");
-		lblNewLabel.setBounds(10, 21, 93, 15);
-		contentPane.add(lblNewLabel);
-		
 		JLabel lblNewLabel_1 = new JLabel("Stock Market");
-		lblNewLabel_1.setBounds(10, 187, 93, 15);
+		lblNewLabel_1.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(159, 10, 109, 15);
 		contentPane.add(lblNewLabel_1);
 		
 		btnUpdateInfo = new JButton("Update Info");
-		btnUpdateInfo.setBounds(10, 367, 109, 23);
+		btnUpdateInfo.setBounds(10, 260, 109, 23);
 		contentPane.add(btnUpdateInfo);
-
-
-		btnActiveStock = new JButton("Active Stock");
-		btnActiveStock.setBounds(159, 367, 109, 23);
-		contentPane.add(btnActiveStock);
-		
-		btnRemove = new JButton("Remove");
-		btnRemove.setBounds(159, 153, 93, 23);
-		contentPane.add(btnRemove);
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
@@ -77,19 +65,11 @@ public class ManageStock extends JFrame {
 				dispose();
 			}
 		});
-		btnBack.setBounds(331, 367, 93, 23);
+		btnBack.setBounds(331, 260, 93, 23);
 		contentPane.add(btnBack);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 46, 414, 105);
-		contentPane.add(scrollPane);
-		
-		textArea_activedStocks = new JTextArea();
-		textArea_activedStocks.setEditable(false);
-		scrollPane.setViewportView(textArea_activedStocks);
-		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 215, 414, 127);
+		scrollPane_1.setBounds(10, 57, 414, 164);
 		contentPane.add(scrollPane_1);
 		
 		textArea_StockMarket = new JTextArea();
@@ -110,20 +90,8 @@ public class ManageStock extends JFrame {
 		btnUpdateInfo.addActionListener(actionListener);
 	}
 
-	public void addActiveStockListener(ActionListener actionListener){
-		btnActiveStock.addActionListener(actionListener);
-	}
-
-	public void addRemoveListener(ActionListener actionListener){
-		btnRemove.addActionListener(actionListener);
-	}
-
 	public void addBackListener(ActionListener actionListener){
 		btnBack.addActionListener(actionListener);
-	}
-
-	public void setActiveStocks(String Info){
-		textArea_activedStocks.setText(Info);
 	}
 
 	public void setStockMarket(String Info){

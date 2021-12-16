@@ -18,6 +18,7 @@ public class Savings {
 	JButton btnWithdraw;
 	JButton btnBack;
 	JComboBox comboBox;
+	private JTextField textField_interests;
 
 	/**
 	 * Launch the application.
@@ -134,6 +135,12 @@ public class Savings {
 		JLabel lblNewLabel_3 = new JLabel("Interests : ");
 		lblNewLabel_3.setBounds(227, 84, 91, 15);
 		frame.getContentPane().add(lblNewLabel_3);
+		
+		textField_interests = new JTextField();
+		textField_interests.setEditable(false);
+		textField_interests.setBounds(301, 81, 66, 21);
+		frame.getContentPane().add(textField_interests);
+		textField_interests.setColumns(10);
 	}
 	/*
 	private JTextField txtAmount;
@@ -148,6 +155,10 @@ public class Savings {
 	 */
 	public void setBalance(String Info){
 		txtABalance.setText(Info);
+	}
+
+	public void setInterests(String Info){
+		textField_interests.setText(Info);
 	}
 
 	public String getAccountID(){
