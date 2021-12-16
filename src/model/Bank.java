@@ -111,4 +111,8 @@ public class Bank {
         bankDatabase.update();
         return true;
     }
+
+    public Manager getManager() {
+        return bankDatabase.getManager();
+    }
 }
