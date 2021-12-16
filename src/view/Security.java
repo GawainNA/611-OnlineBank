@@ -4,11 +4,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
 public class Security {
 
@@ -48,7 +44,7 @@ public class Security {
 	}
 	
 	public void close() {
-		frame.setVisible(false);
+		frame.dispose();
 	}
 
 	/**
@@ -115,6 +111,10 @@ public class Security {
 	JButton btnBack;
 	JButton btnStock;
 	 */
+	public void setBalance(String Info){
+		txtBalance.setText(Info);
+	}
+
 	public void addTransferListener(ActionListener actionListener){
 		btnTransfer.addActionListener(actionListener);
 	}
@@ -129,5 +129,9 @@ public class Security {
 
 	public void addBackListener(ActionListener actionListener){
 		btnBack.addActionListener(actionListener);
+	}
+
+	public void showMessage(String message){
+		JOptionPane.showMessageDialog(frame,message);
 	}
 }

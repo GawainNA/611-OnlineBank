@@ -4,6 +4,7 @@ import model.Bank;
 import model.ErrCode;
 import model.account.SavingAccount;
 import model.currency.CurrencyType;
+import model.user.Customer;
 import view.Savings;
 import view.Transfer;
 
@@ -15,11 +16,13 @@ public class SavingsController {
     SavingAccount savingAccount;
     Savings savingsView;
     Bank bank;
+    Customer customer;
 
-    SavingsController(Bank bank,SavingAccount savingAccount, Savings savingsView){
+    SavingsController(Bank bank,Customer customer,SavingAccount savingAccount, Savings savingsView){
         this.bank = bank;
         this.savingAccount = savingAccount;
         this.savingsView = savingsView;
+        this.customer = customer;
 
         savingsView.addTransferListener(new TransferListener());
         savingsView.addCloseAccountListener(new CloseAccountListener());
@@ -55,7 +58,11 @@ public class SavingsController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            ErrCode errCode = customer.closeSavingAccount();
+            savingsView.showMessage(errCode.errMsg);
+            if(errCode.isSuccess){
+                savingsView.close();
+            }
         }
     }
 

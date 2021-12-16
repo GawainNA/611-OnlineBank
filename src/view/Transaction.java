@@ -15,6 +15,8 @@ import javax.swing.JScrollPane;
 public class Transaction extends JFrame {
 
 	private JPanel contentPane;
+	private JButton btnBack;
+	private JTextArea textArea_Log;
 
 	/**
 	 * Launch the application.
@@ -47,12 +49,7 @@ public class Transaction extends JFrame {
 		lblNewLabel.setBounds(10, 34, 118, 15);
 		contentPane.add(lblNewLabel);
 		
-		JButton btnBack = new JButton("Back");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
+		btnBack = new JButton("Back");
 		btnBack.setBounds(331, 257, 93, 23);
 		contentPane.add(btnBack);
 		
@@ -60,7 +57,15 @@ public class Transaction extends JFrame {
 		scrollPane.setBounds(10, 70, 414, 159);
 		contentPane.add(scrollPane);
 		
-		JTextArea textArea_Log = new JTextArea();
+		textArea_Log = new JTextArea();
 		scrollPane.setViewportView(textArea_Log);
+	}
+
+	public void setLog(String info){
+		textArea_Log.setText(info);
+	}
+
+	public void addBackListener(ActionListener actionListener){
+		btnBack.addActionListener(actionListener);
 	}
 }

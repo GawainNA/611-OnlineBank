@@ -24,7 +24,7 @@ public class CustomerMainController {
         customerMain.addSavingsListener(new SavingsActionListener());
         customerMain.addSecurityListener(new SecurityActionListener());
         customerMain.addLoanListener(new LoanListener());
-        customerMain.addTransactionListener(new TranscationListener());
+        customerMain.addTransactionListener(new TransactionListener());
         customerMain.addOpenAccountListener(new OpenAccountListener());
         customerMain.addSignOutListener(new SignOutListener());
     }
@@ -38,7 +38,7 @@ public class CustomerMainController {
             }else {
                 Checking checkingView = new Checking(String.valueOf(customer.getCheckingAccount().getId()));
                 CheckingAccount checkingAccount = customer.getCheckingAccount();
-                CheckingController controller = new CheckingController(bank,checkingAccount,checkingView);
+                CheckingController controller = new CheckingController(bank,customer,checkingAccount,checkingView);
                 checkingView.showFrame();
             }
         }
@@ -53,7 +53,7 @@ public class CustomerMainController {
             }else {
                 SavingAccount savingAccount = customer.getSavingAccount();
                 Savings savingsView = new Savings(String.valueOf(customer.getSavingAccount().getId()));
-                SavingsController controller = new SavingsController(bank,savingAccount,savingsView);
+                SavingsController controller = new SavingsController(bank,customer,savingAccount,savingsView);
                 savingsView.showFrame();
             }
 
@@ -69,7 +69,7 @@ public class CustomerMainController {
             }else {
                 SecurityAccount securityAccount = customer.getSecurityAccount();
                 Security securityView = new Security(String.valueOf(customer.getSecurityAccount().getId()));
-                SecurityController controller = new SecurityController(bank,securityAccount,securityView);
+                SecurityController controller = new SecurityController(bank,customer,securityAccount,securityView);
                 securityView.showFrame();
             }
 
@@ -96,7 +96,7 @@ public class CustomerMainController {
         }
     }
 
-    class TranscationListener implements ActionListener{
+    class TransactionListener implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {

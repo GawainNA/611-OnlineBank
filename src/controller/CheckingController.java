@@ -4,6 +4,7 @@ import model.Bank;
 import model.ErrCode;
 import model.account.CheckingAccount;
 import model.currency.CurrencyType;
+import model.user.Customer;
 import view.Checking;
 import view.Transfer;
 
@@ -15,9 +16,11 @@ public class CheckingController {
     Bank bank;
     Checking checkingView;
     CheckingAccount checkingAccount;
+    Customer customer;
 
-    CheckingController(Bank bank,CheckingAccount checkingAccount,Checking checkingView){
+    CheckingController(Bank bank,Customer customer,CheckingAccount checkingAccount,Checking checkingView){
         this.bank = bank;
+        this.customer = customer;
         this.checkingAccount = checkingAccount;
         this.checkingView = checkingView;
 
@@ -61,7 +64,11 @@ public class CheckingController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            ErrCode errCode = customer.closeCheckingAccount();
+            checkingView.showMessage(errCode.errMsg);
+            if(errCode.isSuccess){
+                checkingView.close();
+            }
         }
     }
 
