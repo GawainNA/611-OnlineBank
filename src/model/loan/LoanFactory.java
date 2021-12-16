@@ -1,4 +1,4 @@
-package loan;
+package model.loan;
 
 import model.Bank;
 import model.currency.CurrencyType;

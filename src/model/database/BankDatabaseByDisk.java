@@ -12,9 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import loan.Loan;
 import model.Persistable;
 import model.account.Account;
+import model.loan.Loan;
 import model.user.Customer;
 import model.user.Manager;
 

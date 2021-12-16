@@ -3,11 +3,6 @@ package model.user;
 import java.util.ArrayList;
 import java.util.List;
 
-import loan.Collateral;
-import loan.CollateralFactory;
-import loan.Loan;
-import loan.LoanFactory;
-import loan.LoanStatus;
 import model.Bank;
 import model.ErrCode;
 import model.account.Account;
@@ -17,6 +12,11 @@ import model.account.SavingAccount;
 import model.account.SecurityAccount;
 import model.currency.Currency;
 import model.currency.CurrencyType;
+import model.loan.Collateral;
+import model.loan.CollateralFactory;
+import model.loan.Loan;
+import model.loan.LoanFactory;
+import model.loan.LoanStatus;
 
 public class Customer extends User {
     private CheckingAccount checkingAccount;

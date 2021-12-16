@@ -24,6 +24,9 @@ public class Bank {
     private Map<String, Customer> username2CustomerMap;
     private BankDatabase bankDatabase;
 
+    // Stock Market
+    
+
     private Bank() {
         setBankDatabase(BankDatabaseByDisk.getInstance());
         initManager();

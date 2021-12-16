@@ -3,12 +3,12 @@ package model.user;
 import java.util.ArrayList;
 import java.util.List;
 
-import loan.Loan;
-import loan.LoanStatus;
 import model.Bank;
 import model.ErrCode;
 import model.account.AccountFactory;
 import model.account.ManagerAccount;
+import model.loan.Loan;
+import model.loan.LoanStatus;
 
 /**
  * Singleton (only one manager)

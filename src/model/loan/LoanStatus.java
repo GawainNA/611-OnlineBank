@@ -1,4 +1,4 @@
-package loan;
+package model.loan;
 
 public enum LoanStatus {
     LOAN_PENDING("pending"),    // submit, wait for manager to deal

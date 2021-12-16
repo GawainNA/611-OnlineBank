@@ -10,14 +10,14 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import loan.Loan;
-import loan.LoanStatus;
 import model.account.CheckingAccount;
 import model.account.SavingAccount;
 import model.currency.Currency;
 import model.currency.CurrencyType;
 import model.database.BankDatabase;
 import model.database.BankDatabaseByDisk;
+import model.loan.Loan;
+import model.loan.LoanStatus;
 import model.user.Customer;
 import model.user.Manager;
 import model.user.User;

@@ -2,8 +2,8 @@ package model.database;
 
 import java.util.List;
 
-import loan.Loan;
 import model.account.Account;
+import model.loan.Loan;
 import model.user.Customer;
 import model.user.Manager;
 import view.ManageLoan;
