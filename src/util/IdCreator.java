@@ -16,6 +16,12 @@ public class IdCreator {
         int id = Math.abs(random.nextInt());
         while(createdInteger.contains(id)) {
             id = Math.abs(random.nextInt());
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
         return id;
     }
