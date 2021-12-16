@@ -7,6 +7,7 @@ import loan.Collateral;
 import loan.CollateralFactory;
 import loan.Loan;
 import loan.LoanFactory;
+import loan.LoanStatus;
 import model.Bank;
 import model.ErrCode;
 import model.account.Account;
@@ -271,14 +272,59 @@ public class Customer extends User {
 
     /**
      * 
+     * @param loanId
+     * @return if checking account does not have enough money, cannot redeem
+     */
+    public ErrCode repayLoan(int loanId) {
+        Loan loan = Bank.getInstance().getBankDatabase().getLoanById(loanId);
+        return repayLoan(loan);
+    }
+
+    /**
+     * 
      * @param loan: the loan to be reedemd
      * @return if there are enough money in checking account, return true. else
      *         return false.
      */
-    public ErrCode redeemLoan(Loan loan, double amount) {
-        // TODO:
+    public ErrCode repayLoan(Loan loan) {
+        ErrCode errCode = new ErrCode(true, "success");
 
-        return null;
+        // check whether this loan is belong to this customer
+        if(!loanList.contains(loan)) {
+            errCode.isSuccess = false;
+            errCode.errMsg = "this loan does not belong to this customer";
+            return errCode;
+        }
+
+        // check whether have checking account or checking account has been closed
+        // this should not happen!
+        if(checkingAccount == null) {
+            errCode.isSuccess = false;
+            errCode.errMsg = "do not have checking account, this should not happen!";
+            return errCode;
+        }
+
+        // check whether there are enough money in checking account
+        Currency loanCurrency = loan.getLoanCurrency();
+        if(checkingAccount.getCurrencyByType(loanCurrency.getCurrencyType()).getAmount() < loanCurrency.getAmount()) {
+            errCode.isSuccess = false;
+            errCode.errMsg = "do not have enough money in checing account";
+            return errCode;
+        }
+
+        // repay this loan
+        // minus money from account
+        checkingAccount.getCurrencyByType(loanCurrency.getCurrencyType()).minus(loanCurrency);
+        // remove current loan from manager activated loan list
+        Bank.getInstance().getManager().removeActivatedLoan(loan);
+        // change loan status
+        loan.setLoanStatus(LoanStatus.LOAN_REPAYED);
+        // remove from loan list
+        loanList.remove(loan);
+
+        
+        Bank.getInstance().getBankDatabase().update();
+        return errCode;
     }
 
     /***************** getter *********************/
