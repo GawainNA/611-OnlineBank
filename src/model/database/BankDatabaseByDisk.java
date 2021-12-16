@@ -43,10 +43,14 @@ public class BankDatabaseByDisk implements BankDatabase, Persistable {
 
     private BankDatabaseByDisk() {
         customerList = new ArrayList<>();
-        manager = Manager.getInstance();
         idAccountMap = new HashMap<>();
         idCustomerMap = new HashMap<>();
         idLoanMap = new HashMap<>();
+
+        manager = Manager.getInstance();
+        // add manager account into idAccountMap
+        Account managerAccount = manager.getManagerAccount();
+        idAccountMap.put(managerAccount.getId(), managerAccount);
     }
 
 
@@ -147,7 +151,7 @@ public class BankDatabaseByDisk implements BankDatabase, Persistable {
     private void initLoanMap(List<Loan> loanList) {
         if(loanList != null) {
             for(Loan loan : loanList) {
-                idLoanMap.put(loan.getId(), loan);
+                idLoanMap.put(loan.getUid(), loan);
             }
         }
     }
@@ -202,7 +206,7 @@ public class BankDatabaseByDisk implements BankDatabase, Persistable {
 
     @Override
     public void addLoan(Loan loan) {
-        idLoanMap.put(loan.getId(), loan);
+        idLoanMap.put(loan.getUid(), loan);
     }
 
 
