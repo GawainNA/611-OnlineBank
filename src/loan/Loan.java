@@ -7,14 +7,14 @@ import model.currency.CurrencyType;
 import util.IdCreator;
 
 public class Loan implements Persistable{
-    private int id;
+    private int uid;
     private int customerId;
     private Currency loanCurrency;
     private Collateral collateral;
     private LoanStatus loanStatus;
 
     public Loan(int customerId, double loanAmount, CurrencyType currencyType, Collateral collateral) {
-        this.id = IdCreator.createRandomInt();
+        this.uid = IdCreator.createRandomInt();
         this.customerId = customerId;
         this.collateral = collateral;
         this.loanCurrency = new Currency(currencyType, loanAmount);
@@ -41,8 +41,8 @@ public class Loan implements Persistable{
         this(customerId, loanPrice.getAmount(), loanPrice.getCurrencyType(), collateral);
     }
 
-    public int getId() {
-        return id;
+    public int getUid() {
+        return uid;
     }
 
     public Currency getLoanCurrency() {
