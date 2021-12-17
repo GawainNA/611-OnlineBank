@@ -14,25 +14,25 @@ import model.stock.StockMarket;
 import model.stock.StockMarketObserver;
 
 public class SecurityAccount extends Account implements StockMarketObserver {
-    private StockMarket stockMarket;
+    // private transient StockMarket stockMarket = StockMarket.getInstance();
     private Map<String, Stock> nameStockMap;
     private Currency realizedProfit;
     private Currency unrealizedProfit;
 
     public SecurityAccount() {
         super();
-        stockMarket = StockMarket.getInstance();
+        // stockMarket = StockMarket.getInstance();
         nameStockMap = new HashMap<>();
         realizedProfit = new Currency(CurrencyType.DOLLAR, 0);
         unrealizedProfit = new Currency(CurrencyType.DOLLAR, 0);
-        stockMarket.register(this);
+        StockMarket.getInstance().register(this);
     }
 
     public ErrCode buyStock(String stockName, int numStock2Buy) {
         ErrCode errCode = new ErrCode(true, "success");
 
         // check whether stock market has this stock
-        Stock stockToBuy = stockMarket.getStockByName(stockName);
+        Stock stockToBuy = StockMarket.getInstance().getStockByName(stockName);
         if (stockToBuy == null) {
             errCode.isSuccess = false;
             errCode.errMsg = String.format("do not have stock name: ", stockName);
@@ -55,7 +55,12 @@ public class SecurityAccount extends Account implements StockMarketObserver {
             nameStockMap.put(stockName, new Stock(stockName, 0, currencyType, 0));
         }
         Stock stockInHand = nameStockMap.get(stockName);
-        stockInHand.addStock(new Stock(stockName, stockToBuy.getUnitPrice(), numStock2Buy));
+        Stock stockToActualBuy = new Stock(stockName, stockToBuy.getUnitPrice(), numStock2Buy);
+        stockInHand.addStock(stockToActualBuy);
+
+        // minus money from security account
+        this.minusCurrency(stockToActualBuy.getTotalPrice());
+
 
         Bank.getInstance().getBankDatabase().update();
         return errCode;
@@ -80,14 +85,14 @@ public class SecurityAccount extends Account implements StockMarketObserver {
         }
 
         // sell and update realized and unrealized profit
-        Stock stockInMarket = stockMarket.getStockByName(stockName);
+        Stock stockInMarket = StockMarket.getInstance().getStockByName(stockName);
         CurrencyType currencyType = stockInHand.getUnitPrice().getCurrencyType();
         double unitPriceDiff = stockInHand.getUnitPrice().getAmount() - stockInMarket.getUnitPrice().getAmount();
         Currency profit = new Currency(currencyType, numStock2Sell * unitPriceDiff);
         realizedProfit.add(profit);
         unrealizedProfit.minus(profit);
-        // add this profit into security account
-        this.addCurrency(profit);
+        // add this sell price into security account
+        this.addCurrency(new Currency(currencyType, numStock2Sell * stockInMarket.getUnitPrice().getAmount()));
         // update stock in hand
         Stock stock2Sell = new Stock(stockName, stockInMarket.getUnitPrice(), numStock2Sell);
         stockInHand.minusStock(stock2Sell);
@@ -125,7 +130,7 @@ public class SecurityAccount extends Account implements StockMarketObserver {
         // stock in market
         for (String stockName : nameStockMap.keySet()) {
             Stock stockInHand = nameStockMap.get(stockName);
-            Stock stockInMarket = stockMarket.getStockByName(stockName);
+            Stock stockInMarket = StockMarket.getInstance().getStockByName(stockName);
             double unitPriceDiff = stockInHand.getUnitPrice().getAmount() - stockInMarket.getUnitPrice().getAmount();
             unrealizedProfit.add(
                     new Currency(unrealizedProfit.getCurrencyType(), unitPriceDiff * stockInHand.getNumberOfStock()));
