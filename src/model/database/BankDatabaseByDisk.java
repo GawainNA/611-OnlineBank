@@ -58,7 +58,7 @@ public class BankDatabaseByDisk implements BankDatabase, Persistable {
         System.out.println("deserialize()...");
         try {
             File f = new File(STORAGE_FILEPATH);
-            f.createNewFile();
+            // f.createNewFile();
             FileInputStream fileIn = new FileInputStream(f.getAbsolutePath());
             ObjectInputStream in = new ObjectInputStream(fileIn);
             BankDatabaseByDisk res =  (BankDatabaseByDisk) in.readObject();
