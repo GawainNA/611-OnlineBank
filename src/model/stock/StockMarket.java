@@ -26,8 +26,8 @@ public class StockMarket implements Persistable, StockMarketSubject{
     private StockMarket() {
         nameStockMap = new HashMap<>();
         stockMarketObserverSet = new HashSet<>();
-        updateObserverSet();
-        updateStocksInfo();
+        // updateObserverSet();
+        // updateStocksInfo();
     }
 
     public Stock getStockByName(String stockName) {
@@ -61,6 +61,7 @@ public class StockMarket implements Persistable, StockMarketSubject{
             Stock stock = parseStockInfoStr(stockInfo);
             nameStockMap.put(stock.getName(), stock);
         }
+        updateObserverSet();
         notifyObservers();
     }
 
