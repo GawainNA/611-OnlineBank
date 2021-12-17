@@ -2,18 +2,11 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JScrollPane;
 
 public class Stock extends JFrame {
 
@@ -26,7 +19,8 @@ public class Stock extends JFrame {
 	JButton btnBuy;
 	JButton btnSell;
 	JButton btnBack;
-	private JTextField textField_stockID;
+	private JTextField textField_stockName;
+	private JTextField textField_stockAmount;
 	
 
 	/**
@@ -72,7 +66,6 @@ public class Stock extends JFrame {
 		contentPane.add(lblRealizedProfit);
 		
 		textField_Realized = new JTextField();
-		textField_Realized.setText("1000");
 		textField_Realized.setEditable(false);
 		textField_Realized.setBounds(244, 45, 66, 21);
 		contentPane.add(textField_Realized);
@@ -83,7 +76,6 @@ public class Stock extends JFrame {
 		contentPane.add(lblUnrealized);
 		
 		textField_Unrealized = new JTextField();
-		textField_Unrealized.setText("122");
 		textField_Unrealized.setEditable(false);
 		textField_Unrealized.setBounds(336, 165, 66, 21);
 		contentPane.add(textField_Unrealized);
@@ -126,14 +118,23 @@ public class Stock extends JFrame {
 		textArea_availiableStocks.setEditable(false);
 		scrollPane_1.setViewportView(textArea_availiableStocks);
 		
-		JLabel lbStockID = new JLabel("Stock ID");
+		JLabel lbStockID = new JLabel("Stock Name");
 		lbStockID.setBounds(31, 360, 66, 15);
 		contentPane.add(lbStockID);
 		
-		textField_stockID = new JTextField();
-		textField_stockID.setBounds(107, 357, 203, 21);
-		contentPane.add(textField_stockID);
-		textField_stockID.setColumns(10);
+		textField_stockName = new JTextField();
+		textField_stockName.setBounds(107, 357, 88, 21);
+		contentPane.add(textField_stockName);
+		textField_stockName.setColumns(10);
+		
+		textField_stockAmount = new JTextField();
+		textField_stockAmount.setBounds(269, 357, 66, 21);
+		contentPane.add(textField_stockAmount);
+		textField_stockAmount.setColumns(10);
+		
+		JLabel lblAmount = new JLabel("Amount");
+		lblAmount.setBounds(220, 360, 54, 15);
+		contentPane.add(lblAmount);
 	}
 
 	/*
@@ -167,8 +168,12 @@ public class Stock extends JFrame {
 		return currentAccountID;
 	}
 
-	public String getStockID(){
-		return textField_stockID.getText();
+	public String getStockName(){
+		return textField_stockName.getText();
+	}
+
+	public String getStockAmount(){
+		return textField_stockAmount.getText();
 	}
 
 	public void addBuyListener(ActionListener actionListener){
@@ -183,4 +188,7 @@ public class Stock extends JFrame {
 		btnBack.addActionListener(actionListener);
 	}
 
+	public void showMessage(String message){
+		JOptionPane.showMessageDialog(this,message);
+	}
 }
