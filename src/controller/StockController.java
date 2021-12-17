@@ -28,18 +28,22 @@ public class StockController {
     }
 
     private void refresh(){
+        stockView.setTextField_Unrealized(securityAccount.getUnrealizedProfit().getAmount()+"  "+securityAccount.getUnrealizedProfit().getCurrencyType().getName());
+        stockView.setTextField_Realized(securityAccount.getRealizedProfit().getAmount()+"  "+securityAccount.getRealizedProfit().getCurrencyType().getName());
+
         List<model.stock.Stock> yourStocks = securityAccount.getStockList();
         Set<String> names = stockMarket.getAllStockNames();
 
-        String myStocks = "";
-        String Market = "";
+
+        String myStocks = "Name   /   Price   /   Amount\n";
+        String Market = "Name   /   Price   /   Amount\n";
         for(model.stock.Stock i : yourStocks){
-            myStocks = myStocks.concat(i.getName()+"     "+i.getUnitPrice().getAmount()+"  "+i.getUnitPrice().getCurrencyType().getName()+"    "+i.getNumberOfStock()+"\n");
+            myStocks = myStocks.concat(i.getName()+"   /   "+i.getUnitPrice().getAmount()+"  "+i.getUnitPrice().getCurrencyType().getName()+"   /   "+i.getNumberOfStock()+"\n");
         }
 
         for (String i : names){
             model.stock.Stock tmp = stockMarket.getStockByName(i);
-            Market = Market.concat(tmp.getName()+"     "+tmp.getUnitPrice().getAmount()+"  "+tmp.getUnitPrice().getCurrencyType().getName()+"    "+tmp.getNumberOfStock()+"\n");
+            Market = Market.concat(tmp.getName()+"   /   "+tmp.getUnitPrice().getAmount()+"  "+tmp.getUnitPrice().getCurrencyType().getName()+"   /   "+tmp.getNumberOfStock()+"\n");
         }
 
         stockView.setTxtrYourStocks(myStocks);
@@ -58,6 +62,7 @@ public class StockController {
         public void actionPerformed(ActionEvent e) {
             ErrCode errCode = securityAccount.buyStock(stockView.getStockName(),Integer.parseInt(stockView.getStockAmount()));
             stockView.showMessage(errCode.errMsg);
+            refresh();
         }
     }
 
@@ -67,6 +72,7 @@ public class StockController {
         public void actionPerformed(ActionEvent e) {
             ErrCode errCode = securityAccount.sellStock(stockView.getStockName(),Integer.parseInt(stockView.getStockAmount()));
             stockView.showMessage(errCode.errMsg);
+            refresh();
         }
     }
 

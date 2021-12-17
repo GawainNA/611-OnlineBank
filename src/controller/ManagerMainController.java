@@ -2,10 +2,7 @@ package controller;
 
 import model.Bank;
 import model.user.Manager;
-import view.ManageLoan;
-import view.ManagerMain;
-import view.Sign;
-import view.Transaction;
+import view.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -57,7 +54,9 @@ public class ManagerMainController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            ManageStock manageStockView = new ManageStock();
+            ManageStockController controller = new ManageStockController(manager.getStockMarket(),manageStockView);
+            manageStockView.setVisible(true);
         }
     }
 

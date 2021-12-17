@@ -15,7 +15,6 @@ public class Stock extends JFrame {
 	private JTextField textField_Unrealized;
 	JTextArea textArea_availiableStocks;
 	JTextArea textArea_yourStocks;
-	private String currentAccountID;
 	JButton btnBuy;
 	JButton btnSell;
 	JButton btnBack;
@@ -30,7 +29,7 @@ public class Stock extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Stock frame = new Stock("1231");
+					Stock frame = new Stock();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,8 +41,7 @@ public class Stock extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Stock(String currentAccountID) {
-		this.currentAccountID = currentAccountID;
+	public Stock() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 524);
 		contentPane = new JPanel();
@@ -162,10 +160,6 @@ public class Stock extends JFrame {
 
 	public void setTxtrYourStocks(String profit){
 		textArea_yourStocks.setText(profit);
-	}
-
-	public String getCurrentAccountID(){
-		return currentAccountID;
 	}
 
 	public String getStockName(){

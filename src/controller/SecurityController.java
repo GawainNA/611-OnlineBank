@@ -4,8 +4,10 @@ import model.Bank;
 import model.ErrCode;
 import model.account.SecurityAccount;
 import model.currency.CurrencyType;
+import model.stock.StockMarket;
 import model.user.Customer;
 import view.Security;
+import view.Stock;
 import view.TransferInside;
 
 import java.awt.event.ActionEvent;
@@ -69,7 +71,9 @@ public class SecurityController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            Stock stockView = new Stock();
+            StockController controller = new StockController(StockMarket.getInstance(),securityAccount,stockView);
+            stockView.setVisible(true);
         }
     }
 
@@ -77,7 +81,7 @@ public class SecurityController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            securityView.close();
         }
     }
 }

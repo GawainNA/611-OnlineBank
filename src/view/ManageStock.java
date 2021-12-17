@@ -59,7 +59,7 @@ public class ManageStock extends JFrame {
 		btnUpdateInfo.setBounds(10, 260, 109, 23);
 		contentPane.add(btnUpdateInfo);
 		
-		JButton btnBack = new JButton("Back");
+		btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
