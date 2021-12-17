@@ -9,6 +9,7 @@ import model.account.AccountFactory;
 import model.account.ManagerAccount;
 import model.loan.Loan;
 import model.loan.LoanStatus;
+import model.stock.StockMarket;
 
 /**
  * Singleton (only one manager)
@@ -20,11 +21,15 @@ public class Manager extends User {
     private List<Loan> requestedLoanList;
     private ManagerAccount managerAccount;
 
+    private StockMarket stockMarket;
+
     private Manager(String username, UserGender gender, String passwd, String address, String phoneNum) {
         super(username, gender, passwd, address, phoneNum);
         activatedLoanList = new ArrayList<>();
         requestedLoanList = new ArrayList<>();
         managerAccount = AccountFactory.getInstance().createManagerAccount();
+        managerAccount.setUserId(this.getUid());
+        stockMarket = StockMarket.getInstance();
     }
 
     public static Manager getInstance() {
@@ -103,5 +108,10 @@ public class Manager extends User {
     public void setManagerAccount(ManagerAccount managerAccount) {
         this.managerAccount = managerAccount;
     }
+
+    public StockMarket getStockMarket() {
+        return stockMarket;
+    }
+
 
 }

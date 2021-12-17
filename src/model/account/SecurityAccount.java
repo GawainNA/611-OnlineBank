@@ -87,6 +87,8 @@ public class SecurityAccount extends Account implements StockMarketObserver {
         Currency profit = new Currency(currencyType, numStock2Sell * unitPriceDiff);
         realizedProfit.add(profit);
         unrealizedProfit.minus(profit);
+        // add this profit into security account
+        this.addCurrency(profit);
         // update stock in hand
         Stock stock2Sell = new Stock(stockName, stockInMarket.getUnitPrice(), numStock2Sell);
         stockInHand.minusStock(stock2Sell);
