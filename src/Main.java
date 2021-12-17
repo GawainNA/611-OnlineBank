@@ -1,5 +1,6 @@
 import controller.SignInController;
 import model.*;
+import util.AudioPlayer;
 import view.Sign;
 
 
@@ -10,6 +11,8 @@ public class Main {
 
         SignInController sample = new SignInController(bank,sign);
 
+        AudioPlayer audioPlayer = new AudioPlayer("CloZee - Koto.wav");
+        audioPlayer.playAudio();
         sign.showFrame();
     }
 }
