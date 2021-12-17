@@ -21,7 +21,7 @@ public class Manager extends User {
     private List<Loan> requestedLoanList;
     private ManagerAccount managerAccount;
 
-    private StockMarket stockMarket;
+    private transient StockMarket stockMarket;
 
     private Manager(String username, UserGender gender, String passwd, String address, String phoneNum) {
         super(username, gender, passwd, address, phoneNum);
@@ -110,7 +110,7 @@ public class Manager extends User {
     }
 
     public StockMarket getStockMarket() {
-        return stockMarket;
+        return StockMarket.getInstance();
     }
 
 

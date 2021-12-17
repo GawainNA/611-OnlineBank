@@ -16,7 +16,7 @@ import util.FileUtil;
 /**
  * class of StockMarket, singleton
  */
-public class StockMarket implements Persistable, StockMarketSubject{
+public class StockMarket implements StockMarketSubject{
     public static final String STOCKS_INFO_FILEPATH = System.getProperty("user.dir") + "/stocks.csv";
     private static StockMarket stockMarket;
 
