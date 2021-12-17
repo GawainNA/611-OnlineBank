@@ -2,17 +2,28 @@ package model.account;
 
 import model.Bank;
 import model.ErrCode;
+import model.Transaction;
 import model.currency.Currency;
 import model.currency.CurrencyType;
 
 public class CheckingAccount extends Account{
     public void deposit(double amount, CurrencyType currencyType) {
-        deposit(new Currency(currencyType, amount));
+        addCurrency(new Currency(currencyType, amount));
+        
+        // add transaction
+        String desc = String.format("account %d deposit %.2f %s", 
+                                    this.getId(),
+                                    amount,
+                                    currencyType.getName());
+        Transaction transaction = new Transaction(desc);
+        Bank.getInstance().getBankDatabase().getCustomerById(this.getUserId()).addTransaction(transaction);
+        Bank.getInstance().getBankDatabase().getManager().addTransaction(transaction);
+
+        Bank.getInstance().getBankDatabase().update();
     }
 
     public void deposit(Currency currency) {
-        addCurrency(currency);
-        Bank.getInstance().getBankDatabase().update();
+        deposit(currency.getAmount(), currency.getCurrencyType());
     }
 
     public ErrCode withdraw(double amount, CurrencyType currencyType) {
@@ -37,8 +48,18 @@ public class CheckingAccount extends Account{
         }
 
         minusCurrency(currency);  
-        Bank.getInstance().getBankDatabase().update(); 
 
+        // add transaction
+        String desc = String.format("account %d withdraw %.2f %s", 
+                                    this.getId(),
+                                    currency.getAmount(),
+                                    currency.getCurrencyType().getName());
+        Transaction transaction = new Transaction(desc);
+        Bank.getInstance().getBankDatabase().getCustomerById(this.getUserId()).addTransaction(transaction);
+        Bank.getInstance().getBankDatabase().getManager().addTransaction(transaction);
+
+
+        Bank.getInstance().getBankDatabase().update(); 
         return errCode;
     }
 }

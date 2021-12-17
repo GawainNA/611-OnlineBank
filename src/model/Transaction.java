@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * class of transaction
  */
-public class Transaction {
+public class Transaction implements Persistable{
     // tutorial for how to use timestamp: https://mkyong.com/java/how-to-get-current-timestamps-in-java/
     private final long timestamp;    // timestamp that create this transaction
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
