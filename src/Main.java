@@ -3,7 +3,7 @@ import model.*;
 import view.Sign;
 
 
-public class MVCtest {
+public class Main {
     public static void main(String[] args) {
         Sign sign = new Sign();
         Bank bank = Bank.getInstance();
