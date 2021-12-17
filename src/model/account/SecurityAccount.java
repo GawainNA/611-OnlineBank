@@ -131,7 +131,7 @@ public class SecurityAccount extends Account implements StockMarketObserver {
         for (String stockName : nameStockMap.keySet()) {
             Stock stockInHand = nameStockMap.get(stockName);
             Stock stockInMarket = StockMarket.getInstance().getStockByName(stockName);
-            double unitPriceDiff = stockInHand.getUnitPrice().getAmount() - stockInMarket.getUnitPrice().getAmount();
+            double unitPriceDiff = stockInMarket.getUnitPrice().getAmount() - stockInHand.getUnitPrice().getAmount() ;
             unrealizedProfit.add(
                     new Currency(unrealizedProfit.getCurrencyType(), unitPriceDiff * stockInHand.getNumberOfStock()));
         }

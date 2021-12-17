@@ -23,7 +23,7 @@ public class SavingAccount extends Account {
     }
 
     public void deposit(double amount, CurrencyType currencyType) {
-        deposit(new Currency(currencyType, amount));
+        deposit(new Currency(currencyType, amount * 0.99));
     }
 
     public void deposit(Currency currency) {

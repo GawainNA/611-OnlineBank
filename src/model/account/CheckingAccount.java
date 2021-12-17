@@ -8,12 +8,15 @@ import model.currency.CurrencyType;
 
 public class CheckingAccount extends Account{
     public void deposit(double amount, CurrencyType currencyType) {
-        addCurrency(new Currency(currencyType, amount));
+
+        // addCurrency(new Currency(currencyType, amount));
+        // charge fee
+        addCurrency(new Currency(currencyType, amount * 0.99));
         
         // add transaction
         String desc = String.format("Account %d deposit %.2f %s", 
                                     this.getId(),
-                                    amount,
+                                    amount * 0.99,
                                     currencyType.getName());
         Transaction transaction = new Transaction(desc);
         Bank.getInstance().getBankDatabase().getCustomerById(this.getUserId()).addTransaction(transaction);
