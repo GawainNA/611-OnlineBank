@@ -7,6 +7,7 @@ import java.util.Set;
 import model.Bank;
 import model.ErrCode;
 import model.Persistable;
+import model.Transaction;
 import model.currency.Currency;
 import model.currency.CurrencyType;
 import util.IdCreator;
@@ -63,6 +64,19 @@ public abstract class Account implements Persistable{
         Currency transferCurrency = new Currency(currencyType, amount);
         destAccount.addCurrency(transferCurrency);
         this.minusCurrency(transferCurrency);
+
+
+        // add transaction
+        String desc = String.format("Account %d transfer %.2f %s to Account %d", 
+                                    this.getId(),
+                                    amount,
+                                    currencyType.getName(),
+                                    destId);
+        Transaction transaction = new Transaction(desc);
+        Bank.getInstance().getBankDatabase().getCustomerById(this.getUserId()).addTransaction(transaction);
+        Bank.getInstance().getBankDatabase().getCustomerById(destAccount.getUserId()).addTransaction(transaction);
+        Bank.getInstance().getBankDatabase().getManager().addTransaction(transaction);
+
 
         // update database
         Bank.getInstance().getBankDatabase().update();

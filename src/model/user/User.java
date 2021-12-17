@@ -38,8 +38,15 @@ public abstract class User implements Persistable{
 
     // view all transaction logs
     public List<String> viewTransactionLogs() {
-        // TODO: whether should return String???
-        return null;
+        List<String> logs = new ArrayList<>();
+        for(Transaction transaction : transactionList) {
+            logs.add(transaction.getDesc());
+        }
+        return logs;
+    }
+
+    public void addTransaction(Transaction transaction) {
+        transactionList.add(transaction);
     }
 
     public int getUid() {
