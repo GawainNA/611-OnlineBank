@@ -12,12 +12,14 @@ import org.junit.runners.MethodSorters;
 
 import model.account.CheckingAccount;
 import model.account.SavingAccount;
+import model.account.SecurityAccount;
 import model.currency.Currency;
 import model.currency.CurrencyType;
 import model.database.BankDatabase;
 import model.database.BankDatabaseByDisk;
 import model.loan.Loan;
 import model.loan.LoanStatus;
+import model.stock.Stock;
 import model.user.Customer;
 import model.user.Manager;
 import model.user.User;
@@ -229,7 +231,7 @@ public class BankTest {
         // with no money inside
         Customer customer = bankDatabase.getAllCustomer().get(0);
         Manager manager = bankDatabase.getManager();
-        
+
         double loanAmount = 20;
         double collateralPrice = 30;
         String collateralName = "Book";
@@ -242,13 +244,13 @@ public class BankTest {
         // loan status should be pending
         Loan loan = customer.getLoanList().get(0);
         Assert.assertEquals(LoanStatus.LOAN_PENDING, loan.getLoanStatus());
-        // because manger has not agree this loan, checking account should be 0 dollar or do not have this currency type
+        // because manger has not agree this loan, checking account should be 0 dollar
+        // or do not have this currency type
         Currency depositCurrency = customer.getCheckingAccount().getCurrencyByType(currencyType);
-        if(depositCurrency != null) {
-            int depositAmount = (int)depositCurrency.getAmount();
+        if (depositCurrency != null) {
+            int depositAmount = (int) depositCurrency.getAmount();
             Assert.assertEquals(0, depositAmount);
         }
-
 
         // manager requested list should not be empty
         Assert.assertFalse(manager.getRequestedLoanList().isEmpty());
@@ -258,12 +260,10 @@ public class BankTest {
         // activated loan list should not be empty, requested list should be empty
         Assert.assertFalse(manager.getActivatedLoanList().isEmpty());
         Assert.assertTrue(manager.getRequestedLoanList().isEmpty());
-        
 
         // now check customer checking accout, should have loan money
-        int depositAmount = (int)customer.getCheckingAccount().getCurrencyByType(currencyType).getAmount();
-        Assert.assertEquals((int)loanAmount, depositAmount);
-
+        int depositAmount = (int) customer.getCheckingAccount().getCurrencyByType(currencyType).getAmount();
+        Assert.assertEquals((int) loanAmount, depositAmount);
 
         // now try to repay loan, should success
         errCode = customer.repayLoan(loan.getUid());
@@ -271,12 +271,95 @@ public class BankTest {
         // loan status should be REPAY
         Assert.assertEquals(LoanStatus.LOAN_REPAYED, loan.getLoanStatus());
         // checking account should be empty
-        depositAmount = (int)customer.getCheckingAccount().getCurrencyByType(currencyType).getAmount();
+        depositAmount = (int) customer.getCheckingAccount().getCurrencyByType(currencyType).getAmount();
         Assert.assertEquals(0, depositAmount);
         // customer loan list should be empty
         Assert.assertTrue(customer.getLoanList().isEmpty());
         // manager activated list should be empty
         Assert.assertTrue(manager.getActivatedLoanList().isEmpty());
+    }
+
+    @Test
+    public void itestStock() {
+        // this customer should have saving account and checking account
+        // with no money inside
+        Customer customer = bankDatabase.getAllCustomer().get(0);
+
+        CurrencyType currencyType = CurrencyType.DOLLAR;
+        // update stock market
+        Bank.getInstance().getManager().getStockMarket().updateStocksInfo();
+
+        // try to open security account, should fail, because saving account do not have
+        // 5000 dollars
+        ErrCode errCode = customer.openSecurityAccount();
+        Assert.assertFalse(errCode.isSuccess);
+
+        // deposit 5000 dollars into saving account, then open security account, should
+        // success, remain 4000 dollars in saving account
+        customer.getSavingAccount().deposit(5000, CurrencyType.DOLLAR);
+        errCode = customer.openSecurityAccount();
+        Assert.assertTrue(errCode.isSuccess);
+
+        // now security account should have 1000 dollars, try to buy 25
+        // APPLE(100/stock),
+        // should fail
+        String stockName = "APPLE";
+        int numStock2Buy = 25;
+        errCode = customer.getSecurityAccount().buyStock(stockName, numStock2Buy);
+        Assert.assertFalse(errCode.isSuccess);
+
+        // try to transfer 2000 dollars from saving account, should fail saving account
+        // at least should have 2500 dollars
+        SavingAccount savingAccount = customer.getSavingAccount();
+        SecurityAccount securityAccount = customer.getSecurityAccount();
+        errCode = savingAccount.transferTo(securityAccount.getId(), 2000, CurrencyType.DOLLAR);
+        Assert.assertFalse(errCode.isSuccess);
+
+        // transfer 1500, should success
+        errCode = savingAccount.transferTo(securityAccount.getId(), 1500, CurrencyType.DOLLAR);
+        Assert.assertTrue(errCode.isSuccess);
+
+        // try to buy stock, should success
+        errCode = securityAccount.buyStock(stockName, numStock2Buy);
+        Assert.assertTrue(errCode.isSuccess);
+
+        // stock list in security account should not be empty
+        Assert.assertFalse(securityAccount.getStockList().isEmpty());
+
+        Stock stock = securityAccount.getStockList().get(0);
+
+        // try to sell stock, sell 30 stocks, should fail because only have 25
+        errCode = securityAccount.sellStock(stockName, 30);
+        Assert.assertFalse(errCode.isSuccess);
+        // sell 25 stock, should success
+        errCode = securityAccount.sellStock(stockName, 25);
+        Assert.assertTrue(errCode.isSuccess);
+
+        // try to close security account, should fail because there are 2500 dollars in
+        // account
+        errCode = customer.closeSecurityAccount();
+        Assert.assertFalse(errCode.isSuccess);
+
+        // transfer 3000 dollars from security account to saving account, should fail
+        // because do not have so much money
+        errCode = securityAccount.transferTo(savingAccount.getId(), 3000, currencyType);
+        Assert.assertFalse(errCode.isSuccess);
+
+        // transfer 2500 dollars to saving account, should success
+        errCode = securityAccount.transferTo(savingAccount.getId(), 2500, currencyType);
+        Assert.assertTrue(errCode.isSuccess);
+
+        // close security account, should success
+        errCode = customer.closeSecurityAccount();
+        Assert.assertTrue(errCode.isSuccess);
+
+        // withdraw 5001 dollars from saving account, should fail because only have 5000
+        errCode = savingAccount.withdraw(5001, currencyType);
+        Assert.assertFalse(errCode.isSuccess);
+
+        // withdraw 5000 dollars, should success
+        errCode = savingAccount.withdraw(5000, currencyType);
+        Assert.assertTrue(errCode.isSuccess);
     }
 
     @AfterClass
