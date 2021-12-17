@@ -63,7 +63,7 @@ public class OpenAccount extends JFrame {
 		
 		rdbtnSecurity = new JRadioButton("Security Account");
 		buttonGroup.add(rdbtnSecurity);
-		rdbtnSecurity.setBounds(289, 57, 121, 23);
+		rdbtnSecurity.setBounds(274, 57, 139, 23);
 		contentPane.add(rdbtnSecurity);
 		
 		btnOpen = new JButton("Open");

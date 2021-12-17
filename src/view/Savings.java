@@ -137,6 +137,7 @@ public class Savings {
 		frame.getContentPane().add(lblNewLabel_3);
 		
 		textField_interests = new JTextField();
+		textField_interests.setText("0.2%");
 		textField_interests.setEditable(false);
 		textField_interests.setBounds(301, 81, 66, 21);
 		frame.getContentPane().add(textField_interests);
