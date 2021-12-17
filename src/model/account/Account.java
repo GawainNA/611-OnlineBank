@@ -65,7 +65,7 @@ public abstract class Account implements Persistable{
         // should charge fee to transfer
         Currency transferCurrency = new Currency(currencyType, amount * 0.99);
         destAccount.addCurrency(transferCurrency);
-        this.minusCurrency(transferCurrency);
+        this.minusCurrency(new Currency(currencyType, amount));
 
 
         // add transaction
