@@ -11,7 +11,7 @@ public class CheckingAccount extends Account{
         addCurrency(new Currency(currencyType, amount));
         
         // add transaction
-        String desc = String.format("account %d deposit %.2f %s", 
+        String desc = String.format("Account %d deposit %.2f %s", 
                                     this.getId(),
                                     amount,
                                     currencyType.getName());
@@ -50,7 +50,7 @@ public class CheckingAccount extends Account{
         minusCurrency(currency);  
 
         // add transaction
-        String desc = String.format("account %d withdraw %.2f %s", 
+        String desc = String.format("Account %d withdraw %.2f %s", 
                                     this.getId(),
                                     currency.getAmount(),
                                     currency.getCurrencyType().getName());

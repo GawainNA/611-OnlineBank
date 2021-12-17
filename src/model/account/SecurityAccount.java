@@ -15,7 +15,6 @@ import model.stock.StockMarketObserver;
 
 public class SecurityAccount extends Account implements StockMarketObserver {
     private StockMarket stockMarket;
-    // private List<Stock> stockList;
     private Map<String, Stock> nameStockMap;
     private Currency realizedProfit;
     private Currency unrealizedProfit;
