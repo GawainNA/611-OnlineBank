@@ -88,7 +88,7 @@ public class Stock extends JFrame {
 		contentPane.add(btnBuy);
 		
 		btnSell = new JButton("Sell");
-		btnSell.setBounds(221, 396, 89, 23);
+		btnSell.setBounds(268, 396, 89, 23);
 		contentPane.add(btnSell);
 		
 		btnBack = new JButton("Back");
@@ -117,7 +117,7 @@ public class Stock extends JFrame {
 		scrollPane_1.setViewportView(textArea_availiableStocks);
 		
 		JLabel lbStockID = new JLabel("Stock Name");
-		lbStockID.setBounds(31, 360, 66, 15);
+		lbStockID.setBounds(31, 360, 82, 15);
 		contentPane.add(lbStockID);
 		
 		textField_stockName = new JTextField();
@@ -126,12 +126,12 @@ public class Stock extends JFrame {
 		textField_stockName.setColumns(10);
 		
 		textField_stockAmount = new JTextField();
-		textField_stockAmount.setBounds(269, 357, 66, 21);
+		textField_stockAmount.setBounds(291, 357, 66, 21);
 		contentPane.add(textField_stockAmount);
 		textField_stockAmount.setColumns(10);
 		
 		JLabel lblAmount = new JLabel("Amount");
-		lblAmount.setBounds(220, 360, 54, 15);
+		lblAmount.setBounds(227, 360, 54, 15);
 		contentPane.add(lblAmount);
 	}
 

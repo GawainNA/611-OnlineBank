@@ -28,6 +28,8 @@ public class StockController {
     }
 
     private void refresh(){
+        stockMarket.updateStocksInfo();
+
         stockView.setTextField_Unrealized(securityAccount.getUnrealizedProfit().getAmount()+"  "+securityAccount.getUnrealizedProfit().getCurrencyType().getName());
         stockView.setTextField_Realized(securityAccount.getRealizedProfit().getAmount()+"  "+securityAccount.getRealizedProfit().getCurrencyType().getName());
 
@@ -36,14 +38,14 @@ public class StockController {
 
 
         String myStocks = "Name   /   Price   /   Amount\n";
-        String Market = "Name   /   Price   /   Amount\n";
+        String Market = "Name   /   Price   \n";
         for(model.stock.Stock i : yourStocks){
             myStocks = myStocks.concat(i.getName()+"   /   "+i.getUnitPrice().getAmount()+"  "+i.getUnitPrice().getCurrencyType().getName()+"   /   "+i.getNumberOfStock()+"\n");
         }
 
         for (String i : names){
             model.stock.Stock tmp = stockMarket.getStockByName(i);
-            Market = Market.concat(tmp.getName()+"   /   "+tmp.getUnitPrice().getAmount()+"  "+tmp.getUnitPrice().getCurrencyType().getName()+"   /   "+tmp.getNumberOfStock()+"\n");
+            Market = Market.concat(tmp.getName()+"   /   "+tmp.getUnitPrice().getAmount()+"  "+tmp.getUnitPrice().getCurrencyType().getName()+"\n");
         }
 
         stockView.setTxtrYourStocks(myStocks);

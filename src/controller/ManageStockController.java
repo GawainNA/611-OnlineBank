@@ -5,6 +5,7 @@ import model.stock.StockMarket;
 import model.user.Manager;
 import view.ManageStock;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Set;
@@ -27,10 +28,10 @@ public class ManageStockController {
         stockMarket.updateStocksInfo();
 
         Set<String> names = stockMarket.getAllStockNames();
-        String Market = "Name   /   Price   /   Amount\n";
+        String Market = "Name   /   Price   \n";
         for (String i : names){
             model.stock.Stock tmp = stockMarket.getStockByName(i);
-            Market = Market.concat(tmp.getName()+"   /   "+tmp.getUnitPrice().getAmount()+"  "+tmp.getUnitPrice().getCurrencyType().getName()+"   /   "+tmp.getNumberOfStock()+"\n");
+            Market = Market.concat(tmp.getName()+"   /   "+tmp.getUnitPrice().getAmount()+"  "+tmp.getUnitPrice().getCurrencyType().getName()+"\n");
         }
         manageStockView.setStockMarket(Market);
     }
@@ -46,6 +47,7 @@ public class ManageStockController {
         @Override
         public void actionPerformed(ActionEvent e) {
             refresh();
+            manageStockView.showMessage("Update Success!");
         }
     }
 
